@@ -1,0 +1,118 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOOST_SPIRIT_DEBUG	./include/network.h	5;"	d
+abundance_type	./include/solver.h	/^typedef std::vector<double> abundance_type;$/;"	t
+alpha	./include/network.h	/^  double alpha;$/;"	m	struct:reaction	access:public
+beta	./include/network.h	/^  double beta;$/;"	m	struct:reaction	access:public
+charge	./include/species.h	/^  int         charge;$/;"	m	class:species	access:private
+data	./include/interpolator.h	/^  multi_array<double, 2> data;$/;"	m	class:interpolator	access:private
+dumb	./include/network.h	/^  char dumb;$/;"	m	struct:reaction	access:public
+elements	./include/network.h	/^  static const std::map<std::string, int> elements;$/;"	m	struct:network	access:public
+elements	./src/network.cpp	/^const std::map<std::string, int> elements =$/;"	v
+gamma	./include/network.h	/^  double gamma;$/;"	m	struct:reaction	access:public
+get_species_list	./include/network.h	/^  int get_species_list();$/;"	p	struct:network	access:public	signature:()
+get_species_list	./src/network.cpp	/^network::get_species_list()$/;"	f	class:network	signature:()
+interpolator	./include/interpolator.h	/^  interpolator();$/;"	p	class:interpolator	access:public	signature:()
+interpolator	./include/interpolator.h	/^  interpolator(const std::string& incfile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& incfile, const std::string& var)
+interpolator	./include/interpolator.h	/^class interpolator$/;"	c
+interpolator	./src/interpolator.cpp	/^interpolator::interpolator()$/;"	f	class:interpolator	signature:()
+interpolator	./src/interpolator.cpp	/^interpolator::interpolator(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
+interpolator::data	./include/interpolator.h	/^  multi_array<double, 2> data;$/;"	m	class:interpolator	access:private
+interpolator::interpolator	./include/interpolator.h	/^  interpolator();$/;"	p	class:interpolator	access:public	signature:()
+interpolator::interpolator	./include/interpolator.h	/^  interpolator(const std::string& incfile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& incfile, const std::string& var)
+interpolator::interpolator	./src/interpolator.cpp	/^interpolator::interpolator()$/;"	f	class:interpolator	signature:()
+interpolator::interpolator	./src/interpolator.cpp	/^interpolator::interpolator(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
+interpolator::load	./include/interpolator.h	/^  int load(const std::string& infile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& infile, const std::string& var)
+interpolator::load	./src/interpolator.cpp	/^interpolator::load(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
+interpolator::nx	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
+interpolator::ny	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
+interpolator::operator ()	./include/interpolator.h	/^  virtual double operator () (double x, double y);$/;"	p	class:interpolator	access:public	signature:(double x, double y)
+interpolator::operator ()	./src/interpolator.cpp	/^interpolator::operator () (double x, double y)$/;"	f	class:interpolator	signature:(double x, double y)
+interpolator::~interpolator	./include/interpolator.h	/^  virtual ~interpolator() {}$/;"	f	class:interpolator	access:public	signature:()
+load	./include/interpolator.h	/^  int load(const std::string& infile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& infile, const std::string& var)
+load	./src/interpolator.cpp	/^interpolator::load(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
+main	./src/main.cpp	/^int main(int argc, char* argv[])$/;"	f	signature:(int argc, char* argv[])
+mass	./include/species.h	/^  double      mass;$/;"	m	class:species	access:private
+n_reactions	./include/network.h	/^  int n_reactions;$/;"	m	struct:network	access:public
+n_species	./include/network.h	/^  int n_species;$/;"	m	struct:network	access:public
+name	./include/species.h	/^  std::string name;$/;"	m	class:species	access:private
+net	./include/solver.h	/^  std::shared_ptr<network> net;$/;"	m	class:solver	access:private
+network	./include/network.h	/^  network();$/;"	p	struct:network	access:public	signature:()
+network	./include/network.h	/^  network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
+network	./include/network.h	/^struct network$/;"	s
+network	./src/network.cpp	/^network::network() : $/;"	f	class:network	signature:()
+network	./src/network.cpp	/^network::network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
+network::elements	./include/network.h	/^  static const std::map<std::string, int> elements;$/;"	m	struct:network	access:public
+network::get_species_list	./include/network.h	/^  int get_species_list();$/;"	p	struct:network	access:public	signature:()
+network::get_species_list	./src/network.cpp	/^network::get_species_list()$/;"	f	class:network	signature:()
+network::n_reactions	./include/network.h	/^  int n_reactions;$/;"	m	struct:network	access:public
+network::n_species	./include/network.h	/^  int n_species;$/;"	m	struct:network	access:public
+network::network	./include/network.h	/^  network();$/;"	p	struct:network	access:public	signature:()
+network::network	./include/network.h	/^  network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
+network::network	./src/network.cpp	/^network::network() : $/;"	f	class:network	signature:()
+network::network	./src/network.cpp	/^network::network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
+network::reactions	./include/network.h	/^  reaction_v reactions;$/;"	m	struct:network	access:public
+network::read_network	./include/network.h	/^  int read_network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
+network::read_network	./src/network.cpp	/^network::read_network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
+network::species	./include/network.h	/^  spec_v     species;$/;"	m	struct:network	access:public
+network::~network	./include/network.h	/^  virtual ~network();$/;"	p	struct:network	access:public	signature:()
+network::~network	./src/network.cpp	/^network::~network()$/;"	f	class:network	signature:()
+network_parser	./include/network.h	/^    network_parser() : network_parser::base_type(network_rule)$/;"	f	struct:network_parser	access:public	signature:()
+network_parser	./include/network.h	/^struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>$/;"	s	inherits:qi::grammar
+network_parser::network_parser	./include/network.h	/^    network_parser() : network_parser::base_type(network_rule)$/;"	f	struct:network_parser	access:public	signature:()
+network_parser::network_rule	./include/network.h	/^    qi::rule<Iterator, reaction_v(), Skipper> network_rule;$/;"	m	struct:network_parser	access:public
+network_parser::reaction_rule	./include/network.h	/^    qi::rule<Iterator, reaction(), Skipper> reaction_rule;$/;"	m	struct:network_parser	access:public
+network_parser::spec_rule	./include/network.h	/^    qi::rule<Iterator, spec_v(), Skipper> spec_rule;$/;"	m	struct:network_parser	access:public
+network_rule	./include/network.h	/^    qi::rule<Iterator, reaction_v(), Skipper> network_rule;$/;"	m	struct:network_parser	access:public
+num	./include/network.h	/^  int num;$/;"	m	struct:reaction	access:public
+nx	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
+ny	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
+operator ()	./include/interpolator.h	/^  virtual double operator () (double x, double y);$/;"	p	class:interpolator	access:public	signature:(double x, double y)
+operator ()	./include/solver.h	/^  void operator() (const abundance_type &x, abundance_type &dxdt, const double t);$/;"	p	class:solver	access:public	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
+operator ()	./src/interpolator.cpp	/^interpolator::operator () (double x, double y)$/;"	f	class:interpolator	signature:(double x, double y)
+operator ()	./src/solver.cpp	/^solver::operator() (const abundance_type &x, abundance_type &dxdt, const double t)$/;"	f	class:solver	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
+prods	./include/network.h	/^  spec_v prods;$/;"	m	struct:reaction	access:public
+rate	./include/network.h	/^  static double rate(const reaction &r) {return 0.0;}$/;"	f	struct:reaction	access:public	signature:(const reaction &r)
+reaction	./include/network.h	/^struct reaction$/;"	s
+reaction::alpha	./include/network.h	/^  double alpha;$/;"	m	struct:reaction	access:public
+reaction::beta	./include/network.h	/^  double beta;$/;"	m	struct:reaction	access:public
+reaction::dumb	./include/network.h	/^  char dumb;$/;"	m	struct:reaction	access:public
+reaction::gamma	./include/network.h	/^  double gamma;$/;"	m	struct:reaction	access:public
+reaction::num	./include/network.h	/^  int num;$/;"	m	struct:reaction	access:public
+reaction::prods	./include/network.h	/^  spec_v prods;$/;"	m	struct:reaction	access:public
+reaction::rate	./include/network.h	/^  static double rate(const reaction &r) {return 0.0;}$/;"	f	struct:reaction	access:public	signature:(const reaction &r)
+reaction::reacts	./include/network.h	/^  spec_v reacts;$/;"	m	struct:reaction	access:public
+reaction::type	./include/network.h	/^  int type;$/;"	m	struct:reaction	access:public
+reaction_rule	./include/network.h	/^    qi::rule<Iterator, reaction(), Skipper> reaction_rule;$/;"	m	struct:network_parser	access:public
+reaction_v	./include/network.h	/^typedef std::vector<reaction> reaction_v;$/;"	t
+reactions	./include/network.h	/^  reaction_v reactions;$/;"	m	struct:network	access:public
+reacts	./include/network.h	/^  spec_v reacts;$/;"	m	struct:reaction	access:public
+read_network	./include/network.h	/^  int read_network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
+read_network	./src/network.cpp	/^network::read_network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
+solver	./include/solver.h	/^  solver(std::shared_ptr<network> n) : net(n) $/;"	f	class:solver	access:public	signature:(std::shared_ptr<network> n)
+solver	./include/solver.h	/^class solver$/;"	c
+solver::net	./include/solver.h	/^  std::shared_ptr<network> net;$/;"	m	class:solver	access:private
+solver::operator ()	./include/solver.h	/^  void operator() (const abundance_type &x, abundance_type &dxdt, const double t);$/;"	p	class:solver	access:public	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
+solver::operator ()	./src/solver.cpp	/^solver::operator() (const abundance_type &x, abundance_type &dxdt, const double t)$/;"	f	class:solver	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
+solver::solver	./include/solver.h	/^  solver(std::shared_ptr<network> n) : net(n) $/;"	f	class:solver	access:public	signature:(std::shared_ptr<network> n)
+solver::~solver	./include/solver.h	/^  virtual ~solver() { };$/;"	f	class:solver	access:public	signature:()
+spec_rule	./include/network.h	/^    qi::rule<Iterator, spec_v(), Skipper> spec_rule;$/;"	m	struct:network_parser	access:public
+spec_v	./include/network.h	/^typedef std::vector<std::string> spec_v;$/;"	t
+species	./include/network.h	/^  spec_v     species;$/;"	m	struct:network	access:public
+species	./include/species.h	/^  species() {} $/;"	f	class:species	access:public	signature:()
+species	./include/species.h	/^class species$/;"	c
+species::charge	./include/species.h	/^  int         charge;$/;"	m	class:species	access:private
+species::mass	./include/species.h	/^  double      mass;$/;"	m	class:species	access:private
+species::name	./include/species.h	/^  std::string name;$/;"	m	class:species	access:private
+species::species	./include/species.h	/^  species() {} $/;"	f	class:species	access:public	signature:()
+species::~species	./include/species.h	/^  virtual ~species() {}$/;"	f	class:species	access:public	signature:()
+type	./include/network.h	/^  int type;$/;"	m	struct:reaction	access:public
+~interpolator	./include/interpolator.h	/^  virtual ~interpolator() {}$/;"	f	class:interpolator	access:public	signature:()
+~network	./include/network.h	/^  virtual ~network();$/;"	p	struct:network	access:public	signature:()
+~network	./src/network.cpp	/^network::~network()$/;"	f	class:network	signature:()
+~solver	./include/solver.h	/^  virtual ~solver() { };$/;"	f	class:solver	access:public	signature:()
+~species	./include/species.h	/^  virtual ~species() {}$/;"	f	class:species	access:public	signature:()
