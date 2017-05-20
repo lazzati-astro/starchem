@@ -72,10 +72,10 @@ network::~network()
 }
 
 //is this necessary?
-network::network(const std::string& chemfile)
-{
-  read_network(chemfile);
-}
+//network::network(const std::string& chemfile)
+//{
+//  read_network(chemfile);
+//}
 
 /* read the network file and store the chemical network 
  * the details of input parsing are in the header file.
@@ -105,8 +105,10 @@ network::read_network(const std::string& chemfile)
   {
     LOGI << "parser fail!!";
   }
+  
+  if(f!=l) LOGI << "remaining unparsed: '" << std::string(f,l) << "'";
 
-  LOGI << "geting species from network...";
+  LOGI << "getting species from network...";
   get_species_list();
 
   LOGI << "mapping species index to reactions...";
@@ -117,6 +119,30 @@ network::read_network(const std::string& chemfile)
 
   LOGI << "network loaded from [" << chemfile << "]";
   LOGI << "got " << n_species << " species in " << n_reactions << " reactions";
+}
+
+/*
+ * do any updates on read network
+ * used to:
+ * - read nucleation interpolators for dust grains
+ *
+ */
+void
+network::post_process()
+{
+  for(const auto& reaction : reactions)
+  {
+    if (reaction.type == REACTION_TYPE_NUCLEATE)
+    {
+      LOGI << "reaction " << reaction.num << " is dust nucleation";
+      LOGI << "reading " << reaction.extra << " for nucleation data";
+
+      std::string nucleation_file(reaction.extra);
+      nucl_rate_data.insert(std::make_pair(reaction.num, interp2D(nucleation_file)));
+
+      LOGI << "nucleation data loaded";
+    }
+  }
 }
 
 size_t
@@ -138,15 +164,10 @@ network::map_species_to_reactions()
   for(auto &r : reactions)
   {
     for(auto &reactant : r.reacts)
-    { 
-      r.reacts_idx.emplace_back(find_spec_idx(reactant));
-    }
+      r.reacts_idx.push_back(find_spec_idx(reactant));
 
     for(auto &product : r.prods)
-    {
-      r.prods_idx.emplace_back(find_spec_idx(product));
-    }
-
+      r.prods_idx.push_back(find_spec_idx(product));
   }
 }
 
@@ -171,3 +192,5 @@ network::get_species_list()
     LOGI << "added..." << s << " to species list";
   }
 }
+
+

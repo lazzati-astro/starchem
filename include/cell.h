@@ -12,7 +12,7 @@
 //typedef std::vector<double> abundance_v;
 
 typedef boost::numeric::ublas::vector< double > abundance_v;
-typedef boost::numeric::ublas::matrix< double > matrix_type;
+typedef boost::numeric::ublas::matrix< double > jacobi_m;
 
 
 struct cell_observer
@@ -82,5 +82,8 @@ public:
   void operator() (const abundance_v &x, abundance_v &dxdt, const double t);
 
   int get_id() { return cid; }
+
+  
+  void jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt);
 
 };

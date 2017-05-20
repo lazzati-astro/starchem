@@ -1,9 +1,9 @@
-# Makefile for SFV1D
+# Makefile for starchem
 #
 #
 
 # Project Name
-PROJECT := sfc1D
+PROJECT := starchem
 
 # output directories
 prefix ?= /usr/local
@@ -16,7 +16,7 @@ BOOST_DIR := $(LOCAL_DIR)/boost
 PLOG_DIR  := $(LOCAL_DIR)/plog
 
 # build dir
-DEBUG ?= 1
+DEBUG ?= 0
 ifeq ($(DEBUG),1)
 	BUILD_DIR := $(ROOT_BUILD_DIR)/debug
 else

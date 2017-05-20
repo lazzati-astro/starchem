@@ -16,7 +16,12 @@ star_chem::star_chem(const std::string& config_file)
 void
 star_chem::load_network()
 {
+  LOGI << "load network";
   net.read_network(sc_config.network_file);
+
+  LOGI << "post process network";
+  net.post_process();
+
   LOGI << "network loaded";
 }
 

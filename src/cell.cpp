@@ -62,8 +62,9 @@ cell::solve(const configuration& config)
   auto abs_err = config.ode_abs_err, rel_err = config.ode_rel_err;
   auto time_start = env_times.front(), time_end = env_times.back();
   auto dt0 = config.ode_dt_0;
-  
-  auto store_every=100, dump_every=1000;
+ 
+  //CONFIG ME 
+  auto store_every=config.io_disk_n_steps, dump_every=config.io_screen_n_steps;
 
   typedef runge_kutta_cash_karp54< abundance_v > stepper_type;
   auto stepper = make_controlled(abs_err, rel_err, stepper_type());
@@ -117,34 +118,44 @@ cell::print_abundances(const spec_v& following)
 void
 cell::operator() (const abundance_v &x, abundance_v &dxdt, const double t)
 {
-  double x_product;
 
 //  LOGD << "Beginning integration step (t = " << t << ")";
 //  LOGI << "using " << net->reactions.size() << " reactions";
 
-  auto temperature = env_temperature_spline(t);
-  auto volume = env_volume_spline(t);
+  double fi;
+  double temperature, saturation; 
+  double volume, dvolume;
+
+
+  temperature = env_temperature_spline(t);
+  env_volume_spline.val_and_deriv(t, volume, dvolume); 
 
   std::fill(dxdt.begin(), dxdt.end(), 0.0); 
 
   for(auto &reaction : net->reactions)
   {
-    x_product = 1.0;
+    fi = 1.0;
 
-    for(const auto &r_idx : reaction.reacts_idx)    
-      x_product *= x[r_idx];     
+    for(const auto &r_idx : reaction.reacts_idx) 
+      fi *= x[r_idx];     
 
-    x_product *= reaction.rate(temperature);
+    fi *= reaction.rate(temperature);
     
     for(const auto &r_idx : reaction.reacts_idx)
-      dxdt[r_idx] -= x_product;
+      dxdt[r_idx] -= fi;
 
     for(const auto &p_idx : reaction.prods_idx)
-      dxdt[p_idx] += x_product; 
+      dxdt[p_idx] += fi; 
 
   } 
-  
+
 //  LOGD << "Integration step complete";
 }
+
+void
+cell::jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt)
+{
+  
+} 
 
 

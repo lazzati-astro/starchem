@@ -25,7 +25,13 @@ class netcdf_reader
 
   NcFile ncdf_file;
   std::vector<std::string> ncdf_dims, ncdf_vars;
+
+  axes2D a2d;
+  std::vector<data2D> d2d;
   
+  void                    load_dims();
+  void                    load_data();
+
 public:
   netcdf_reader(const std::string& nc_file, 
                 const std::vector<std::string>& dims, 
@@ -33,9 +39,11 @@ public:
 
   virtual ~netcdf_reader() {}
 
-  
+
+  void                    load();  
+
   axes2D                  get_dims();
-  std::array<data2D, 2>   get_data(const axes2D& ax);
+  std::vector<data2D>     get_data();
 };
 
 class interp2D
@@ -45,10 +53,15 @@ class interp2D
 
 public:
 
-  interp2D(const axes2D& input_axis, const std::vector<data2D>& data);
+  interp2D() {};
+  interp2D(const std::string& ncdf_file);
+  interp2D(const axes2D& input_axis, const std::vector<data2D>& input_data);
 
   virtual ~interp2D() {}
 
+  void load_from_netcdf(const std::string& nc_file);
+
+  void set_data(const axes2D& input_axis, const std::vector<data2D>& input_data);
   double interpolate(int col_id, double xval, double yval);
 
 };

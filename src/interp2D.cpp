@@ -19,11 +19,9 @@ netcdf_reader::netcdf_reader(const std::string& nc_file,
 }
 
 
-axes2D
-netcdf_reader::get_dims()
+void
+netcdf_reader::load_dims()
 {
-  axes2D axes;
-
   std::multimap<std::string, NcDim> dims = ncdf_file.getDims();
   
   for(auto &d : dims)
@@ -40,11 +38,11 @@ netcdf_reader::get_dims()
       exit(1);
     }
 
-    axes[didx].nx = d.second.getSize(); 
+    a2d[didx].nx = d.second.getSize(); 
 
-    axes[didx].x.resize(axes[didx].nx);
+    a2d[didx].x.resize(a2d[didx].nx);
 
-    auto buf = std::make_unique<double[]>(axes[didx].nx);
+    auto buf = std::make_unique<double[]>(a2d[didx].nx);
     auto var = ncdf_file.getVar(d.first.c_str());
 
     if (var.isNull()) 
@@ -56,23 +54,22 @@ netcdf_reader::get_dims()
     {
       auto pbuf = (double*)buf.get();
       var.getVar(pbuf);
-      axes[didx].x.assign(pbuf, pbuf + axes[didx].nx);
+      a2d[didx].x.assign(pbuf, pbuf + a2d[didx].nx);
     }
-    axes[didx].dx = (axes[didx].x.back() - axes[didx].x.front()) / ((double) axes[didx].nx);
+    a2d[didx].dx = (a2d[didx].x.back() - a2d[didx].x.front()) / ((double) a2d[didx].nx);
   }
-  return axes;
 }
 
 
-std::array<data2D, 2>
-netcdf_reader::get_data(const axes2D& ax)
+void
+netcdf_reader::load_data()
 {
-  std::array<data2D, 2> rdata;
-  
-  for(auto &rd : rdata)
-    rd.resize(extents[ax[0].nx][ax[1].nx]);
+  d2d.resize(ncdf_vars.size()); 
+ 
+  for(auto &rd : d2d)
+    rd.resize(extents[a2d[0].nx][a2d[1].nx]);
 
-  auto buflen = ax[0].nx * ax[1].nx;
+  auto buflen = a2d[0].nx * a2d[1].nx;
 
   auto buffer = std::make_unique<double[]>(buflen);
   auto pbuffer = (double*)buffer.get();
@@ -82,24 +79,69 @@ netcdf_reader::get_data(const axes2D& ax)
     NcVar ncdf_data = ncdf_file.getVar(ncdf_vars[i]);
 
     ncdf_data.getVar(pbuffer); 
-    rdata[i].assign(pbuffer, pbuffer + buflen);
+    d2d[i].assign(pbuffer, pbuffer + buflen);
   }
-  return rdata;
 } 
+
+axes2D
+netcdf_reader::get_dims() { return a2d; }
+
+std::vector<data2D>
+netcdf_reader::get_data() { return d2d; }
+
+interp2D::interp2D(const std::string& ncdf_file)
+{
+  load_from_netcdf(ncdf_file);
+}
 
 interp2D::interp2D(const axes2D& input_axis, const std::vector<data2D>& input_data)
 {
+  set_data(input_axis, input_data);
+}
+
+void
+interp2D::set_data(const axes2D& input_axis, const std::vector<data2D>& input_data)
+{
   axes = input_axis;
   data.assign(input_data.begin(),input_data.end());
+}
+void
+interp2D::load_from_netcdf(const std::string& nc_file)
+{
+  std::vector<std::string> dims = {"temperature", "saturation"};
+  std::vector<std::string> cols = {"nucleation_rate", "critical_size"};
+
+  netcdf_reader nr(nc_file, dims, cols);
+
+  set_data(nr.get_dims(), nr.get_data());  
 }
 
 double
 interp2D::interpolate(int col_id, double xval, double yval)
 {
-  int ix = (int)((xval - axes[0].x[0]) / (axes[0].dx));
-  int iy = (int)((yval - axes[1].x[0]) / (axes[1].dx));
 
-  std::cout << axes[0].dx <<" , "<<axes[1].dx<<std::endl;
+  auto cr = [=] (auto val, auto dim) 
+    { 
+      if (val < axes[dim].x.front() || val >= axes[dim].x.back())
+        return false;
+      return true;
+    };
+  
+  auto get_idx = [=] (auto val, auto dim)
+    {
+      return (int)((val - axes[dim].x[dim]) / (axes[dim].dx));
+    };
+
+  if (!cr(xval, 0) || !cr(yval, 1)) 
+  {
+    LOGE << "given value is outside of interpolate axis";
+    return 0.0;      
+  }
+
+  int ix = get_idx(xval, 0);
+  int iy = get_idx(yval, 1);
+
+//  std::cout << axes[0].dx <<" , "<<axes[1].dx<<std::endl;
 
   double xp = (xval - axes[0].x[ix]) / axes[0].dx;
   double yp = (yval - axes[1].x[iy]) / axes[1].dx;
