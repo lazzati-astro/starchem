@@ -15,7 +15,8 @@ netcdf_reader::netcdf_reader(const std::string& nc_file,
   ncdf_file(nc_file, NcFile::read),
   ncdf_dims(dims), ncdf_vars(vars)
 {
-
+  load_dims();
+  load_data();
 }
 
 
@@ -23,7 +24,7 @@ void
 netcdf_reader::load_dims()
 {
   std::multimap<std::string, NcDim> dims = ncdf_file.getDims();
-  
+
   for(auto &d : dims)
   {
     auto didx = -1;
@@ -56,7 +57,7 @@ netcdf_reader::load_dims()
       var.getVar(pbuf);
       a2d[didx].x.assign(pbuf, pbuf + a2d[didx].nx);
     }
-    a2d[didx].dx = (a2d[didx].x.back() - a2d[didx].x.front()) / ((double) a2d[didx].nx);
+    a2d[didx].dx = (a2d[didx].x.back() - a2d[didx].x.front()) / ((double) (a2d[didx].nx));
   }
 }
 
@@ -71,11 +72,14 @@ netcdf_reader::load_data()
 
   auto buflen = a2d[0].nx * a2d[1].nx;
 
-  auto buffer = std::make_unique<double[]>(buflen);
-  auto pbuffer = (double*)buffer.get();
+//  auto buffer = std::make_unique<double[]>(buflen);
+//  auto pbuffer = (double*)buffer.get();
 
   for(auto i = 0 ; i < ncdf_vars.size(); i++)
   {
+    auto buffer = std::make_unique<double[]>(buflen);
+    auto pbuffer = (double*)buffer.get();
+
     NcVar ncdf_data = ncdf_file.getVar(ncdf_vars[i]);
 
     ncdf_data.getVar(pbuffer); 
@@ -113,43 +117,41 @@ interp2D::load_from_netcdf(const std::string& nc_file)
 
   netcdf_reader nr(nc_file, dims, cols);
 
-  set_data(nr.get_dims(), nr.get_data());  
+  set_data(nr.get_dims(), nr.get_data()); 
 }
 
 double
 interp2D::interpolate(int col_id, double xval, double yval)
 {
 
-  auto cr = [=] (auto val, auto dim) 
-    { 
-      if (val < axes[dim].x.front() || val >= axes[dim].x.back())
-        return false;
-      return true;
-    };
-  
-  auto get_idx = [=] (auto val, auto dim)
-    {
-      return (int)((val - axes[dim].x[dim]) / (axes[dim].dx));
-    };
-
-  if (!cr(xval, 0) || !cr(yval, 1)) 
+  if (xval <= axes[0].x.front() || xval >= axes[0].x.back()
+      || yval <= axes[1].x.front() || yval >= axes[1].x.back())
   {
-    LOGE << "given value is outside of interpolate axis";
-    return 0.0;      
+//    LOGE << "given value is outside of interpolate axis";
+    return -1.0;
   }
+  
+  auto const itx = std::lower_bound(axes[0].x.begin(), axes[0].x.end(), xval) - 1;
+  auto const ity = std::lower_bound(axes[1].x.begin(), axes[1].x.end(), yval) - 1;
 
-  int ix = get_idx(xval, 0);
-  int iy = get_idx(yval, 1);
+  auto const ix = itx - axes[0].x.begin();
+  auto const iy = ity - axes[1].x.begin();
 
-//  std::cout << axes[0].dx <<" , "<<axes[1].dx<<std::endl;
+  double xp = (xval - *itx) / axes[0].dx;
+  double yp = (yval - *ity) / axes[1].dx;
 
-  double xp = (xval - axes[0].x[ix]) / axes[0].dx;
-  double yp = (yval - axes[1].x[iy]) / axes[1].dx;
- 
-  double f0 = data[col_id][ix][iy];
-  double f1 = data[col_id][ix + 1][iy];
-  double f2 = data[col_id][ix][iy + 1];
-  double f3 = data[col_id][ix + 1][iy + 1];
+  auto ixp1 = ix + 1;
+  ixp1 = (ixp1 >= axes[0].x.size() ? ix : ixp1);
+  
+  auto iyp1 = iy + 1;
+  iyp1 = (iyp1 >= axes[1].x.size() ? iy : iyp1);
+
+//  std::cout<<ix << " " <<iy<<" "<<xval<<" "<<yval<<std::endl;
+   
+  double f0 = data[col_id][iy][ix];
+  double f1 = data[col_id][iyp1][ix];
+  double f2 = data[col_id][iy][ixp1];
+  double f3 = data[col_id][iyp1][ixp1];
 
   double r1 = f0 * (1.0 - xp) * (1.0 - yp)
               + f1 * xp * (1.0 - yp)

@@ -6,4 +6,5 @@ C          + O                       -> CO         + photon                     
 O          + O                       -> O2         + photon                                               4.90e-20  1.58e+00  0.00e+00  8 3678
 C          + C2                      -> C3         + photon                                               3.30e-16 -1.00e+00  0.00e+00  8 3684
 C          + C3                      -> C4         + photon                                               3.30e-14 -1.00e+00  0.00e+00  8 3685
-C          -> Cgrain                                                        0.0 0.0 0.0  101 3685 data/grainrate_si.nc
+Mg + Mg + Si + O + O + O + O         -> si_grain                                                          18.62E4   52.4336   0.0       101 3686 data/grainrate_si.nc
+C                                    -> c_grain                                                           8.64726E4 19.0422   0.0       101 3687 data/grainrate_c.nc

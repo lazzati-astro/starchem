@@ -48,6 +48,7 @@ public:
 
 class interp2D
 {
+public:
   axes2D                  axes;
   std::vector<data2D>     data;
 

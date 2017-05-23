@@ -9,10 +9,10 @@
 #include "network.h"
 
 //typedef std::vector<double> abundance_v;
-//typedef std::vector<double> abundance_v;
+typedef std::vector<double> abundance_v;
 
-typedef boost::numeric::ublas::vector< double > abundance_v;
-typedef boost::numeric::ublas::matrix< double > jacobi_m;
+//typedef boost::numeric::ublas::vector< double > abundance_v;
+//typedef boost::numeric::ublas::matrix< double > jacobi_m;
 
 
 struct cell_observer
@@ -28,6 +28,7 @@ struct cell_observer
   
   void operator() (const abundance_v &x, double t)
   {
+    n_called++;
     if (n_called % m_nstore == 0)
     {
       m_states.push_back(x);
@@ -84,6 +85,6 @@ public:
   int get_id() { return cid; }
 
   
-  void jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt);
+//  void jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt);
 
 };

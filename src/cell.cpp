@@ -4,6 +4,7 @@
 #include <boost/format.hpp>
 #include <plog/Log.h>
 
+#include "constants.h"
 #include "spline.h"
 #include "configuration.h"
 #include "network.h"
@@ -63,15 +64,16 @@ cell::solve(const configuration& config)
   auto time_start = env_times.front(), time_end = env_times.back();
   auto dt0 = config.ode_dt_0;
  
-  //CONFIG ME 
   auto store_every=config.io_disk_n_steps, dump_every=config.io_screen_n_steps;
+
+  LOGI << "Solver settings are ABS_ERR = " << abs_err << ", REL_ERR = " << rel_err;
+  LOGI << "Beginning integration TIME_0 = " << time_start << " to TIME_N = " << time_end;
 
   typedef runge_kutta_cash_karp54< abundance_v > stepper_type;
   auto stepper = make_controlled(abs_err, rel_err, stepper_type());
 
-  LOGI << "Solver settings are ABS_ERR = " << abs_err << ", REL_ERR = " << rel_err;
-  LOGI << "Beginning integration TIME_0 = " << time_start << " to TIME_N = " << time_end;
   auto steps = integrate_adaptive(stepper, std::ref(*(this)), initial_abundances, time_start, time_end, dt0, cell_observer(solution_abundances, solution_times, store_every, dump_every)); 
+
   LOGI << "Integration finished with " << steps << " steps";
 
 }
@@ -118,44 +120,89 @@ cell::print_abundances(const spec_v& following)
 void
 cell::operator() (const abundance_v &x, abundance_v &dxdt, const double t)
 {
+  using constants::kBeta;
+  using constants::equPres;
+  using constants::shapeFactor;
 
 //  LOGD << "Beginning integration step (t = " << t << ")";
 //  LOGI << "using " << net->reactions.size() << " reactions";
 
   double fi;
-  double temperature, saturation; 
+  double temperature;
   double volume, dvolume;
-
 
   temperature = env_temperature_spline(t);
   env_volume_spline.val_and_deriv(t, volume, dvolume); 
 
-  std::fill(dxdt.begin(), dxdt.end(), 0.0); 
+  std::fill(dxdt.begin(), dxdt.end(), 0.0);
+
+  auto d_rho = -dvolume / volume;
+  for(auto i = 0; i < dxdt.size(); i++)
+  {
+    dxdt[i] = d_rho * x[i];
+  } 
 
   for(auto &reaction : net->reactions)
   {
     fi = 1.0;
 
-    for(const auto &r_idx : reaction.reacts_idx) 
-      fi *= x[r_idx];     
+    if (reaction.type == REACTION_TYPE_NUCLEATE)
+    {
 
-    fi *= reaction.rate(temperature);
+      bool nucleation_ok = true;
+      for(const auto& r_idx : reaction.reacts_idx)
+      {
+        if (x[r_idx] < 1.0E-10)
+        {
+          nucleation_ok = false;
+          break;
+        }
+      }
+
+      if (!nucleation_ok) continue;
+      auto pressure_equilibrium = equPres(reaction.alpha, reaction.beta, temperature);
+      auto pressure = x[reaction.reacts_idx[0]] * kBeta(temperature);
+      auto saturation = pressure / pressure_equilibrium;
+
+      auto critical_size = net->nucl_rate_data[reaction.num].interpolate(1, temperature, saturation);
+      if ( critical_size > 0.0 )
+      {
+        auto log_nucleation_rate = net->nucl_rate_data[reaction.num].interpolate(0, temperature, saturation);
+        auto grains_nucleated = pow(10.0,log_nucleation_rate) * critical_size;
+
+        for(const auto& r_idx : reaction.reacts_idx)
+        {
+          dxdt[r_idx] -= grains_nucleated;
+        }
+        for(const auto& p_idx : reaction.prods_idx)
+        {
+          dxdt[p_idx] += grains_nucleated;
+        }
+        
+      }
+    }
+    else
+    {
+      for(const auto &r_idx : reaction.reacts_idx)
+        fi *= x[r_idx];
+      
+      fi *= reaction.rate(temperature);
     
-    for(const auto &r_idx : reaction.reacts_idx)
-      dxdt[r_idx] -= fi;
+      for(const auto &r_idx : reaction.reacts_idx)
+        dxdt[r_idx] -= fi;
 
-    for(const auto &p_idx : reaction.prods_idx)
-      dxdt[p_idx] += fi; 
-
+      for(const auto &p_idx : reaction.prods_idx)
+        dxdt[p_idx] += fi;
+    } 
   } 
-
+ 
 //  LOGD << "Integration step complete";
 }
 
-void
+/*void
 cell::jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt)
 {
   
 } 
-
+*/
 

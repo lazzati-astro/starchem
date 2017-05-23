@@ -41,7 +41,7 @@ LINK_FLAGS :=
 LD_FLAGS := $(addprefix -l,$(LIBS)) $(addprefix -L, $(LIB_DIR))
 
 ifeq ($(DEBUG),1)
-	COMMON_FLAGS += -pg 
+	COMMON_FLAGS += -g 
 else
 	COMMON_FLAGS += -O3 -march=native
 endif
