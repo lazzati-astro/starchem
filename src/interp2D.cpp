@@ -72,9 +72,6 @@ netcdf_reader::load_data()
 
   auto buflen = a2d[0].nx * a2d[1].nx;
 
-//  auto buffer = std::make_unique<double[]>(buflen);
-//  auto pbuffer = (double*)buffer.get();
-
   for(auto i = 0 ; i < ncdf_vars.size(); i++)
   {
     auto buffer = std::make_unique<double[]>(buflen);
@@ -120,25 +117,34 @@ interp2D::load_from_netcdf(const std::string& nc_file)
   set_data(nr.get_dims(), nr.get_data()); 
 }
 
+bool
+interp2D::check_point(double xval, double yval)
+{
+  if ( xval <= axes[0].x.front() || 
+      xval >= axes[0].x.back()  || 
+      yval <= axes[1].x.front() || 
+      yval >= axes[1].x.back() ) return false;
+  return true;
+}
+
 double
 interp2D::interpolate(int col_id, double xval, double yval)
 {
 
-  if (xval <= axes[0].x.front() || xval >= axes[0].x.back()
-      || yval <= axes[1].x.front() || yval >= axes[1].x.back())
+  if (!check_point(xval,yval))
   {
-//    LOGE << "given value is outside of interpolate axis";
     return -1.0;
   }
   
   auto const itx = std::lower_bound(axes[0].x.begin(), axes[0].x.end(), xval) - 1;
   auto const ity = std::lower_bound(axes[1].x.begin(), axes[1].x.end(), yval) - 1;
 
-  auto const ix = itx - axes[0].x.begin();
-  auto const iy = ity - axes[1].x.begin();
+  auto const ix = std::distance(axes[0].x.begin(), itx);
+  auto const iy = std::distance(axes[1].x.begin(), ity);
 
   double xp = (xval - *itx) / axes[0].dx;
   double yp = (yval - *ity) / axes[1].dx;
+
 
   auto ixp1 = ix + 1;
   ixp1 = (ixp1 >= axes[0].x.size() ? ix : ixp1);
@@ -146,8 +152,6 @@ interp2D::interpolate(int col_id, double xval, double yval)
   auto iyp1 = iy + 1;
   iyp1 = (iyp1 >= axes[1].x.size() ? iy : iyp1);
 
-//  std::cout<<ix << " " <<iy<<" "<<xval<<" "<<yval<<std::endl;
-   
   double f0 = data[col_id][iy][ix];
   double f1 = data[col_id][iyp1][ix];
   double f2 = data[col_id][iy][ixp1];

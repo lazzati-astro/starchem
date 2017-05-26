@@ -63,6 +63,8 @@ public:
   void load_from_netcdf(const std::string& nc_file);
 
   void set_data(const axes2D& input_axis, const std::vector<data2D>& input_data);
+
+  bool   check_point(double xval, double yval);
   double interpolate(int col_id, double xval, double yval);
 
 };

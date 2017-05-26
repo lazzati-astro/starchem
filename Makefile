@@ -41,9 +41,9 @@ LINK_FLAGS :=
 LD_FLAGS := $(addprefix -l,$(LIBS)) $(addprefix -L, $(LIB_DIR))
 
 ifeq ($(DEBUG),1)
-	COMMON_FLAGS += -g 
+	COMMON_FLAGS += -pg 
 else
-	COMMON_FLAGS += -O3 -march=native
+	COMMON_FLAGS += -Ofast -march=native
 endif
 
 # source files

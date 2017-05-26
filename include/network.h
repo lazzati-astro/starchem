@@ -7,36 +7,11 @@
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix.hpp>
 
+#include "reaction.h"
 #include "interp2D.h"
 
 namespace qi = boost::spirit::qi;
 namespace phx = boost::phoenix;
-
-typedef std::vector<std::string> spec_v;
-typedef std::vector<size_t> specidx_v;
-
-const int REACTION_TYPE_NUCLEATE = 101;
-
-struct reaction
-{
-  spec_v reacts;
-  spec_v prods;
-
-  specidx_v reacts_idx;
-  specidx_v prods_idx;
-
-  double alpha;
-  double beta;
-  double gamma;
-
-  int type;
-  int num;
-
-  std::string extra;
-
-  double rate(double tgas);
-
-};
 
 typedef std::vector<reaction> reaction_v;
 
@@ -48,7 +23,7 @@ BOOST_FUSION_ADAPT_STRUCT(
           (double, beta)
           (double, gamma)
           (int, type)
-          (int, num)
+          (int, id)
           (std::string, extra)
 )
 
@@ -84,13 +59,16 @@ struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>
     qi::rule<Iterator, std::string(), Skipper> extra_rule;
 };
 
+
+
 struct network
 {
 
-  static const std::map<std::string, int> elements;
-  
-  reaction_v  reactions;
-  spec_v      species;
+  std::vector<reaction>       reactions;
+  std::vector<std::string>    species;
+
+  std::vector<std::vector<int>> reactants_idx;
+  std::vector<std::vector<int>> products_idx;
 
   std::map<int, interp2D> nucl_rate_data;
 
@@ -100,7 +78,7 @@ struct network
   int         get_species_list();
   int         map_species_to_reactions();
 
-  size_t      find_spec_idx(const std::string &spec);
+  size_t      get_species_index(const std::string &spec);
 
   int         read_network(const std::string& chemfile);
   void        post_process();

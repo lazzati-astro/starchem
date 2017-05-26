@@ -4,62 +4,6 @@
 #include <boost/spirit/include/qi.hpp>
 #include "network.h"
 
-
-/* a map for element bookkeeping. I can't find a use for it yet,
- * but worth keeping around */
-const std::map<std::string, int> elements =
-  {
-    {"H",1},
-    {"D",2},
-    {"He",2},
-    {"C",12},
-    {"-13-C",13},
-    {"N",14},
-    {"-15-N",15},
-    {"O",16},
-    {"-17-O",17},
-    {"-18-O",18},
-    {"F",19},
-    {"Ne",20},
-    {"Na",23},
-    {"Mg",24},
-    {"Si",28},
-    {"-29-Si",29},
-    {"S",30},
-    {"P",31},
-    {"Cl",35},
-    {"Fe",56},
-    {"grain",0},
-    {"X",1},
-    {"Y",1}
-  };
-
-double
-reaction::rate(double tgas)
-{
-  double k = 0.0;
-  switch(type)
-  {
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 14:
-      k = alpha * pow( tgas / 300.0, beta ) * exp( -gamma / tgas);
-      break;
-    default:
-      LOGE << "UNKNOWN TYPE (" << type <<")";
-  }
-  return k;
-}
-
 network::network() : 
   n_reactions(0), 
   n_species(0)
@@ -103,7 +47,8 @@ network::read_network(const std::string& chemfile)
   }
   else
   {
-    LOGI << "parser fail!!";
+    LOGE << "parser fail!!";
+    exit(1);
   }
   
   if(f!=l) LOGI << "remaining unparsed: '" << std::string(f,l) << "'";
@@ -111,11 +56,13 @@ network::read_network(const std::string& chemfile)
   LOGI << "getting species from network...";
   get_species_list();
 
-  LOGI << "mapping species index to reactions...";
-  map_species_to_reactions();  
-
   n_reactions = reactions.size();
   n_species = species.size();
+
+  
+  //LOGI << "mapping species index to reactions...";
+  map_species_to_reactions();  
+
 
   LOGI << "network loaded from [" << chemfile << "]";
   LOGI << "got " << n_species << " species in " << n_reactions << " reactions";
@@ -134,11 +81,11 @@ network::post_process()
   {
     if (reaction.type == REACTION_TYPE_NUCLEATE)
     {
-      LOGI << "reaction " << reaction.num << " is dust nucleation";
+      LOGI << "reaction " << reaction.id << " is dust nucleation";
       LOGI << "reading " << reaction.extra << " for nucleation data";
 
       std::string nucleation_file(reaction.extra);
-      nucl_rate_data.insert(std::make_pair(reaction.num, interp2D(nucleation_file)));
+      nucl_rate_data.insert(std::make_pair(reaction.id, interp2D(nucleation_file)));
 
       LOGI << "nucleation data loaded";
     }
@@ -146,7 +93,7 @@ network::post_process()
 }
 
 size_t
-network::find_spec_idx(const std::string &spec)
+network::get_species_index(const std::string &spec)
 {
   auto it = std::find(species.begin(), species.end(), spec);
   auto idx = -1;
@@ -157,17 +104,19 @@ network::find_spec_idx(const std::string &spec)
   return idx;
 }
 
+
 int
 network::map_species_to_reactions()
 {
-  
-  for(auto &r : reactions)
+  reactants_idx.resize(n_reactions);
+  products_idx.resize(n_reactions);
+  for(auto i = 0; i < n_reactions; i++)
   {
-    for(auto &reactant : r.reacts)
-      r.reacts_idx.push_back(find_spec_idx(reactant));
+    for(const auto &reactant : reactions[i].reacts)
+      reactants_idx[i].push_back(get_species_index(reactant));
 
-    for(auto &product : r.prods)
-      r.prods_idx.push_back(find_spec_idx(product));
+    for(const auto &product : reactions[i].prods)
+      products_idx[i].push_back(get_species_index(product));
   }
 }
 
@@ -192,5 +141,4 @@ network::get_species_list()
     LOGI << "added..." << s << " to species list";
   }
 }
-
 

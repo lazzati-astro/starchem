@@ -8,15 +8,17 @@
 #include "spline.h"
 #include "network.h"
 
+const double CELL_MINIMUM_ABUNDANCE = 1.0E-10;
 //typedef std::vector<double> abundance_v;
 typedef std::vector<double> abundance_v;
 
 //typedef boost::numeric::ublas::vector< double > abundance_v;
 //typedef boost::numeric::ublas::matrix< double > jacobi_m;
 
-
 struct cell_observer
 {
+  using double_sec = std::chrono::duration<double>;
+
   std::vector<abundance_v>& m_states;
   std::vector<double>& m_times;
 
@@ -26,7 +28,7 @@ struct cell_observer
   cell_observer( std::vector <abundance_v> &states, std::vector<double>& times, uint32_t store_every_n, uint32_t dump_every_n)
   : m_states(states), m_times(times), m_nstore(store_every_n), m_ndump(dump_every_n), n_called(0) {}
   
-  void operator() (const abundance_v &x, double t)
+  void operator() (const abundance_v &x, const double t, const double dt)
   {
     n_called++;
     if (n_called % m_nstore == 0)
@@ -37,10 +39,11 @@ struct cell_observer
 
     if (n_called % m_ndump == 0)
     {
-      std::cout<<t<< std::endl;
+      std::cout<<"t = " << t <<" dt = "<<dt<< std::endl;
     }
   }
 };
+
 struct cell_input
 {
   std::vector<double> initial_abundances;
@@ -56,6 +59,8 @@ class cell
   network *net;
   
   abundance_v initial_abundances;
+  abundance_v current_abundances;
+
   std::vector<abundance_v> solution_abundances;
   std::vector<double> solution_times;
   

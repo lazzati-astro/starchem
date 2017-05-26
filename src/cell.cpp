@@ -11,12 +11,12 @@
 #include "cell.h"
 
 using namespace boost::numeric::odeint;
-//using namespace boost::format;
 
 cell::cell(network *n, uint32_t id, const spec_v& init_s, const cell_input& input_data) : net(n), cid(id)
 {
   set_init_abundances(init_s, input_data);
   set_env_data(input_data);
+    
   LOGD << "Created cell " << id;
 }
 
@@ -30,7 +30,7 @@ cell::set_init_abundances(const spec_v& init_s, const cell_input& init_data)
   
   for(auto i = 0; i < init_s.size(); i++)
   {
-    auto idx = net->find_spec_idx(init_s[i]);
+    auto idx = net->get_species_index(init_s[i]);
     if (idx != -1)
     {
       initial_abundances[idx] = init_data.initial_abundances[i];
@@ -40,6 +40,7 @@ cell::set_init_abundances(const spec_v& init_s, const cell_input& init_data)
     {
       LOGD << "(" << init_s[i] << ") not found in network! it will be ignored";
     }
+  
   }
 
 }
@@ -69,12 +70,31 @@ cell::solve(const configuration& config)
   LOGI << "Solver settings are ABS_ERR = " << abs_err << ", REL_ERR = " << rel_err;
   LOGI << "Beginning integration TIME_0 = " << time_start << " to TIME_N = " << time_end;
 
-  typedef runge_kutta_cash_karp54< abundance_v > stepper_type;
-  auto stepper = make_controlled(abs_err, rel_err, stepper_type());
+  auto rkd = runge_kutta_dopri5<abundance_v>{};
+  auto stepper = make_dense_output(abs_err, rel_err, rkd);
 
-  auto steps = integrate_adaptive(stepper, std::ref(*(this)), initial_abundances, time_start, time_end, dt0, cell_observer(solution_abundances, solution_times, store_every, dump_every)); 
+  auto solve_steps = 0;
 
-  LOGI << "Integration finished with " << steps << " steps";
+  current_abundances.assign(initial_abundances.begin(), initial_abundances.end());
+
+  stepper.initialize(current_abundances, time_start, dt0);
+  cell_observer observer(solution_abundances, solution_times, store_every, dump_every);
+
+  while( ( stepper.current_time() < time_end ) )
+  {
+ 
+    stepper.do_step( std::ref(*(this)) );
+    observer(stepper.current_state(), stepper.current_time(), stepper.current_time_step());
+  
+//    for(auto &interpolators : net->nucl_rate_data)
+//    {
+//             
+//    }
+
+    ++solve_steps;
+  }
+
+  LOGI << "Integration finished with " << solve_steps << " steps";
 
 }
 
@@ -93,7 +113,7 @@ cell::print_abundances(const spec_v& following)
 
   for (const auto &f : following)
   {
-    auto idx = net->find_spec_idx(f);
+    auto idx = net->get_species_index(f);
     if (idx != -1)
     {
       following_idx.push_back(idx);
@@ -141,58 +161,43 @@ cell::operator() (const abundance_v &x, abundance_v &dxdt, const double t)
   {
     dxdt[i] = d_rho * x[i];
   } 
-
-  for(auto &reaction : net->reactions)
+  for(auto i = 0 ; i < net->n_reactions; i++)
   {
-    fi = 1.0;
-
-    if (reaction.type == REACTION_TYPE_NUCLEATE)
+    if (net->reactions[i].type == REACTION_TYPE_NUCLEATE)
     {
+      auto key_idx = net->reactants_idx[i][0];
 
-      bool nucleation_ok = true;
-      for(const auto& r_idx : reaction.reacts_idx)
-      {
-        if (x[r_idx] < 1.0E-10)
-        {
-          nucleation_ok = false;
-          break;
-        }
-      }
-
-      if (!nucleation_ok) continue;
-      auto pressure_equilibrium = equPres(reaction.alpha, reaction.beta, temperature);
-      auto pressure = x[reaction.reacts_idx[0]] * kBeta(temperature);
+      auto pressure_equilibrium = equPres(net->reactions[i].alpha, net->reactions[i].beta, temperature);
+      auto pressure = x[key_idx] * kBeta(temperature);
       auto saturation = pressure / pressure_equilibrium;
 
-      auto critical_size = net->nucl_rate_data[reaction.num].interpolate(1, temperature, saturation);
+      auto critical_size = net->nucl_rate_data[net->reactions[i].id].interpolate(1, temperature, saturation);
       if ( critical_size > 0.0 )
       {
-        auto log_nucleation_rate = net->nucl_rate_data[reaction.num].interpolate(0, temperature, saturation);
+        auto log_nucleation_rate = net->nucl_rate_data[net->reactions[i].id].interpolate(0, temperature, saturation);
         auto grains_nucleated = pow(10.0,log_nucleation_rate) * critical_size;
 
-        for(const auto& r_idx : reaction.reacts_idx)
-        {
-          dxdt[r_idx] -= grains_nucleated;
-        }
-        for(const auto& p_idx : reaction.prods_idx)
-        {
-          dxdt[p_idx] += grains_nucleated;
-        }
+        for(const auto& r : net->reactants_idx[i])
+          dxdt[r] -= grains_nucleated;
+    
+        for(const auto& p : net->products_idx[i])
+          dxdt[p] += grains_nucleated;
         
       }
     }
     else
     {
-      for(const auto &r_idx : reaction.reacts_idx)
-        fi *= x[r_idx];
+      fi = 1.0;
+      for(const auto& r : net->reactants_idx[i])
+        fi *= x[r];
       
-      fi *= reaction.rate(temperature);
+      fi *= net->reactions[i].rate(temperature);
     
-      for(const auto &r_idx : reaction.reacts_idx)
-        dxdt[r_idx] -= fi;
+      for(const auto& r : net->reactants_idx[i])
+        dxdt[r] -= fi;
 
-      for(const auto &p_idx : reaction.prods_idx)
-        dxdt[p_idx] += fi;
+      for(const auto& p : net->products_idx[i])
+        dxdt[p] += fi;
     } 
   } 
  

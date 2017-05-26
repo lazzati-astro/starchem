@@ -9,8 +9,8 @@
 
 int main(int argc, char* argv[])
 {
-
-  plog::init(plog::debug, "log.txt");
+  
+  plog::init(plog::verbose, "log.txt", 0, 1);
 
   LOGD << "starchem has started";
 
