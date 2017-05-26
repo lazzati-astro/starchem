@@ -26,11 +26,7 @@ int main(int argc, char* argv[])
   spec_v following = {"C","O","Mg","Si","CO","C2","c_grain","si_grain"};
   sc.set_following(following);
 
-  
   sc.run();
-//  c.set_init_abundances(elems, iabuns[0].);
-//  c.solve();
-//  c.print_abundances(following);
 
   return 0;
 }
