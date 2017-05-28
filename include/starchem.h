@@ -1,36 +1,41 @@
 #pragma once
 
+#include <vector>
+#include <map>
+#include <string>
+
 #include "configuration.h"
 #include "network.h"
 #include "cell.h"
 
 namespace options = boost::program_options;
 
-class star_chem
-{
+class star_chem {
 
-  configuration                 sc_config;
-  std::vector<std::string>      initial_elements;
-  
-  std::map<uint32_t, cell_input> cell_inputs;
+    configuration                 sc_config;
+    std::vector<std::string>      initial_elements;
 
-  std::vector<cell>             cells;
-  network                       net;
+    std::map<uint32_t, cell_input> cell_inputs;
 
-  std::vector<std::string>      following_species;
+    std::vector<cell>             cells;
+    network                       net;
 
- public:
-  star_chem(const std::string& config_filename);
-  virtual ~star_chem() {}
+    std::vector<std::string>      following_species;
 
-  void load_network();
-  void load_initial_abundances();
-  void load_environment_data();
+  public:
+    star_chem(const std::string &config_filename);
+    virtual ~star_chem() {}
 
-  void create_simulation_cells();
+    void load_network();
+    void load_initial_abundances();
+    void load_environment_data();
 
-  void set_following(const spec_v& following_list) { following_species.assign(following_list.begin(), following_list.end()); }
+    void create_simulation_cells();
 
-  void run(); 
-  void cleanup() {}
+    void set_following(const spec_v &following_list) {
+        following_species.assign(following_list.begin(), following_list.end());
+    }
+
+    void run();
+    void cleanup() {}
 };

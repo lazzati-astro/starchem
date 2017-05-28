@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <string>
+
 #include <plog/Log.h>
 #include <boost/algorithm/string.hpp>
 
@@ -7,26 +9,25 @@
 #include "cell.h"
 #include "network.h"
 
-int main(int argc, char* argv[])
-{
-  
-  plog::init(plog::verbose, "log.txt", 0, 1);
+int main(int argc, char *argv[]) {
 
-  LOGD << "starchem has started";
+    plog::init(plog::verbose, "log.txt", 0, 1);
 
-  std::string cfn("config.ini");
+    LOGD << "starchem has started";
 
-  star_chem sc(cfn);
+    std::string cfn("config.ini");
 
-  sc.load_network();
-  sc.load_initial_abundances();
-  sc.load_environment_data();
-  sc.create_simulation_cells();
+    star_chem sc(cfn);
 
-  spec_v following = {"C","O","Mg","Si","CO","C2","c_grain","si_grain"};
-  sc.set_following(following);
+    sc.load_network();
+    sc.load_initial_abundances();
+    sc.load_environment_data();
+    sc.create_simulation_cells();
 
-  sc.run();
+    spec_v following = {"C", "O", "Mg", "Si", "CO", "C2", "c_grain", "si_grain"};
+    sc.set_following(following);
 
-  return 0;
+    sc.run();
+
+    return 0;
 }

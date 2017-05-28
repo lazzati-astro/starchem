@@ -1,14 +1,12 @@
-#include <bits/stdc++.h>
+#include <cmath>
 #include <plog/Log.h>
 
 #include "reaction.h"
 
 double
-reaction::rate(double tgas)
-{
-  double k = 0.0;
-  switch(type)
-  {
+reaction::rate(double tgas) {
+    double k = 0.0;
+    switch (type) {
     case 2:
     case 3:
     case 4:
@@ -21,12 +19,12 @@ reaction::rate(double tgas)
     case 11:
     case 12:
     case 14:
-      k = alpha * pow( tgas / 300.0, beta ) * exp( -gamma / tgas);
-      break;
+        k = alpha * pow( tgas / 300.0, beta ) * exp( -gamma / tgas);
+        break;
     default:
-      LOGE << "UNKNOWN TYPE (" << type <<")";
-  }
-  return k;
+        LOGE << "UNKNOWN TYPE (" << type << ")";
+    }
+    return k;
 }
 
 

@@ -4,115 +4,475 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-BOOST_SPIRIT_DEBUG	./include/network.h	5;"	d
-abundance_type	./include/solver.h	/^typedef std::vector<double> abundance_type;$/;"	t
-alpha	./include/network.h	/^  double alpha;$/;"	m	struct:reaction	access:public
-beta	./include/network.h	/^  double beta;$/;"	m	struct:reaction	access:public
-charge	./include/species.h	/^  int         charge;$/;"	m	class:species	access:private
-data	./include/interpolator.h	/^  multi_array<double, 2> data;$/;"	m	class:interpolator	access:private
-dumb	./include/network.h	/^  char dumb;$/;"	m	struct:reaction	access:public
-elements	./include/network.h	/^  static const std::map<std::string, int> elements;$/;"	m	struct:network	access:public
-elements	./src/network.cpp	/^const std::map<std::string, int> elements =$/;"	v
-gamma	./include/network.h	/^  double gamma;$/;"	m	struct:reaction	access:public
-get_species_list	./include/network.h	/^  int get_species_list();$/;"	p	struct:network	access:public	signature:()
-get_species_list	./src/network.cpp	/^network::get_species_list()$/;"	f	class:network	signature:()
-interpolator	./include/interpolator.h	/^  interpolator();$/;"	p	class:interpolator	access:public	signature:()
-interpolator	./include/interpolator.h	/^  interpolator(const std::string& incfile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& incfile, const std::string& var)
-interpolator	./include/interpolator.h	/^class interpolator$/;"	c
-interpolator	./src/interpolator.cpp	/^interpolator::interpolator()$/;"	f	class:interpolator	signature:()
-interpolator	./src/interpolator.cpp	/^interpolator::interpolator(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
-interpolator::data	./include/interpolator.h	/^  multi_array<double, 2> data;$/;"	m	class:interpolator	access:private
-interpolator::interpolator	./include/interpolator.h	/^  interpolator();$/;"	p	class:interpolator	access:public	signature:()
-interpolator::interpolator	./include/interpolator.h	/^  interpolator(const std::string& incfile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& incfile, const std::string& var)
-interpolator::interpolator	./src/interpolator.cpp	/^interpolator::interpolator()$/;"	f	class:interpolator	signature:()
-interpolator::interpolator	./src/interpolator.cpp	/^interpolator::interpolator(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
-interpolator::load	./include/interpolator.h	/^  int load(const std::string& infile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& infile, const std::string& var)
-interpolator::load	./src/interpolator.cpp	/^interpolator::load(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
-interpolator::nx	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
-interpolator::ny	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
-interpolator::operator ()	./include/interpolator.h	/^  virtual double operator () (double x, double y);$/;"	p	class:interpolator	access:public	signature:(double x, double y)
-interpolator::operator ()	./src/interpolator.cpp	/^interpolator::operator () (double x, double y)$/;"	f	class:interpolator	signature:(double x, double y)
-interpolator::~interpolator	./include/interpolator.h	/^  virtual ~interpolator() {}$/;"	f	class:interpolator	access:public	signature:()
-load	./include/interpolator.h	/^  int load(const std::string& infile, const std::string& var);$/;"	p	class:interpolator	access:public	signature:(const std::string& infile, const std::string& var)
-load	./src/interpolator.cpp	/^interpolator::load(const std::string& inputfile, const std::string& var)$/;"	f	class:interpolator	signature:(const std::string& inputfile, const std::string& var)
-main	./src/main.cpp	/^int main(int argc, char* argv[])$/;"	f	signature:(int argc, char* argv[])
-mass	./include/species.h	/^  double      mass;$/;"	m	class:species	access:private
-n_reactions	./include/network.h	/^  int n_reactions;$/;"	m	struct:network	access:public
-n_species	./include/network.h	/^  int n_species;$/;"	m	struct:network	access:public
-name	./include/species.h	/^  std::string name;$/;"	m	class:species	access:private
-net	./include/solver.h	/^  std::shared_ptr<network> net;$/;"	m	class:solver	access:private
-network	./include/network.h	/^  network();$/;"	p	struct:network	access:public	signature:()
-network	./include/network.h	/^  network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
-network	./include/network.h	/^struct network$/;"	s
-network	./src/network.cpp	/^network::network() : $/;"	f	class:network	signature:()
-network	./src/network.cpp	/^network::network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
-network::elements	./include/network.h	/^  static const std::map<std::string, int> elements;$/;"	m	struct:network	access:public
-network::get_species_list	./include/network.h	/^  int get_species_list();$/;"	p	struct:network	access:public	signature:()
-network::get_species_list	./src/network.cpp	/^network::get_species_list()$/;"	f	class:network	signature:()
-network::n_reactions	./include/network.h	/^  int n_reactions;$/;"	m	struct:network	access:public
-network::n_species	./include/network.h	/^  int n_species;$/;"	m	struct:network	access:public
-network::network	./include/network.h	/^  network();$/;"	p	struct:network	access:public	signature:()
-network::network	./include/network.h	/^  network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
-network::network	./src/network.cpp	/^network::network() : $/;"	f	class:network	signature:()
-network::network	./src/network.cpp	/^network::network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
-network::reactions	./include/network.h	/^  reaction_v reactions;$/;"	m	struct:network	access:public
-network::read_network	./include/network.h	/^  int read_network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
-network::read_network	./src/network.cpp	/^network::read_network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
-network::species	./include/network.h	/^  spec_v     species;$/;"	m	struct:network	access:public
-network::~network	./include/network.h	/^  virtual ~network();$/;"	p	struct:network	access:public	signature:()
-network::~network	./src/network.cpp	/^network::~network()$/;"	f	class:network	signature:()
-network_parser	./include/network.h	/^    network_parser() : network_parser::base_type(network_rule)$/;"	f	struct:network_parser	access:public	signature:()
-network_parser	./include/network.h	/^struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>$/;"	s	inherits:qi::grammar
-network_parser::network_parser	./include/network.h	/^    network_parser() : network_parser::base_type(network_rule)$/;"	f	struct:network_parser	access:public	signature:()
+CELL_MINIMUM_ABUNDANCE	./include/cell.h	/^const double CELL_MINIMUM_ABUNDANCE = 1.0E-10;$/;"	v
+REACTION_TYPE_NUCLEATE	./include/reaction.h	/^const int REACTION_TYPE_NUCLEATE = 101;$/;"	v
+TK_SPLINE_H	./include/spline.h	28;"	d
+a2d	./include/interp2D.h	/^    axes2D a2d;$/;"	m	class:netcdf_reader	access:private
+abundance_file	./include/configuration.h	/^    std::string abundance_file;$/;"	m	struct:configuration	access:public
+abundance_v	./include/cell.h	/^typedef std::vector<double> abundance_v;$/;"	t
+alpha	./include/reaction.h	/^    double alpha;$/;"	m	struct:reaction	access:public
+axes	./include/interp2D.h	/^    axes2D                  axes;$/;"	m	class:interp2D	access:public
+axes2D	./include/interp2D.h	/^typedef std::array<axis, 2>           axes2D;$/;"	t
+axis	./include/interp2D.h	/^struct axis {$/;"	s
+axis::dx	./include/interp2D.h	/^    double   dx;$/;"	m	struct:axis	access:public
+axis::nx	./include/interp2D.h	/^    uint32_t nx;$/;"	m	struct:axis	access:public
+axis::reset	./include/interp2D.h	/^    void reset() {$/;"	f	struct:axis	access:public	signature:()
+axis::x	./include/interp2D.h	/^    std::vector<double> x;$/;"	m	struct:axis	access:public
+band_matrix	./include/spline.h	/^    band_matrix() {};                             \/\/ constructor$/;"	f	class:tk::band_matrix	access:public	signature:()
+band_matrix	./include/spline.h	/^    band_matrix(int dim, int n_u, int n_l);       \/\/ constructor$/;"	p	class:tk::band_matrix	access:public	signature:(int dim, int n_u, int n_l)
+band_matrix	./include/spline.h	/^class band_matrix {$/;"	c	namespace:tk
+band_matrix	./src/spline.cpp	/^band_matrix::band_matrix(int dim, int n_u, int n_l) {$/;"	f	class:tk::band_matrix	signature:(int dim, int n_u, int n_l)
+bd_type	./include/spline.h	/^    enum bd_type {$/;"	g	class:tk::spline	access:public
+beta	./include/reaction.h	/^    double beta;$/;"	m	struct:reaction	access:public
+cell	./include/cell.h	/^    cell(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data);$/;"	p	class:cell	access:public	signature:(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data)
+cell	./include/cell.h	/^class cell {$/;"	c
+cell	./src/cell.cpp	/^cell::cell(network *n, uint32_t id, const spec_v &init_s,$/;"	f	class:cell	signature:(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data)
+cell::cell	./include/cell.h	/^    cell(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data);$/;"	p	class:cell	access:public	signature:(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data)
+cell::cell	./src/cell.cpp	/^cell::cell(network *n, uint32_t id, const spec_v &init_s,$/;"	f	class:cell	signature:(network *n, uint32_t id, const spec_v &init_s, const cell_input &input_data)
+cell::cid	./include/cell.h	/^    uint32_t cid;$/;"	m	class:cell	access:private
+cell::current_abundances	./include/cell.h	/^    abundance_v current_abundances;$/;"	m	class:cell	access:private
+cell::env_temperature_spline	./include/cell.h	/^    tk::spline env_temperature_spline;$/;"	m	class:cell	access:private
+cell::env_temperatures	./include/cell.h	/^    std::vector<double> env_temperatures;$/;"	m	class:cell	access:private
+cell::env_times	./include/cell.h	/^    std::vector<double> env_times;$/;"	m	class:cell	access:private
+cell::env_volume_spline	./include/cell.h	/^    tk::spline env_volume_spline;$/;"	m	class:cell	access:private
+cell::env_volumes	./include/cell.h	/^    std::vector<double> env_volumes;$/;"	m	class:cell	access:private
+cell::get_id	./include/cell.h	/^    int get_id() {$/;"	f	class:cell	access:public	signature:()
+cell::initial_abundances	./include/cell.h	/^    abundance_v initial_abundances;$/;"	m	class:cell	access:private
+cell::net	./include/cell.h	/^    network *net;$/;"	m	class:cell	access:private
+cell::operator ()	./include/cell.h	/^    void operator() (const abundance_v &x, abundance_v &dxdt, const double t);$/;"	p	class:cell	access:public	signature:(const abundance_v &x, abundance_v &dxdt, const double t)
+cell::operator ()	./src/cell.cpp	/^void cell::operator()(const abundance_v &x, abundance_v &dxdt, const double t) {$/;"	f	class:cell	signature:(const abundance_v &x, abundance_v &dxdt, const double t)
+cell::print_abundances	./include/cell.h	/^    void print_abundances(const spec_v &following);$/;"	p	class:cell	access:public	signature:(const spec_v &following)
+cell::print_abundances	./src/cell.cpp	/^cell::print_abundances(const spec_v &following) {$/;"	f	class:cell	signature:(const spec_v &following)
+cell::reaction_switch	./include/cell.h	/^    std::vector<bool> reaction_switch;$/;"	m	class:cell	access:private
+cell::set_env_data	./include/cell.h	/^    void set_env_data(const cell_input &input_data);$/;"	p	class:cell	access:private	signature:(const cell_input &input_data)
+cell::set_env_data	./src/cell.cpp	/^cell::set_env_data(const cell_input &input_data) {$/;"	f	class:cell	signature:(const cell_input &input_data)
+cell::set_init_abundances	./include/cell.h	/^    void set_init_abundances(const spec_v &init_s, const cell_input &init_data);$/;"	p	class:cell	access:private	signature:(const spec_v &init_s, const cell_input &init_data)
+cell::set_init_abundances	./src/cell.cpp	/^cell::set_init_abundances(const spec_v &init_s, const cell_input &init_data) {$/;"	f	class:cell	signature:(const spec_v &init_s, const cell_input &init_data)
+cell::solution_abundances	./include/cell.h	/^    std::vector<abundance_v> solution_abundances;$/;"	m	class:cell	access:private
+cell::solution_times	./include/cell.h	/^    std::vector<double> solution_times;$/;"	m	class:cell	access:private
+cell::solve	./include/cell.h	/^    void solve(const configuration &c);$/;"	p	class:cell	access:public	signature:(const configuration &c)
+cell::solve	./src/cell.cpp	/^cell::solve(const configuration &config) {$/;"	f	class:cell	signature:(const configuration &config)
+cell::state_vars	./include/cell.h	/^    cell_state state_vars;$/;"	m	class:cell	access:private
+cell::~cell	./include/cell.h	/^    virtual ~cell() { };$/;"	f	class:cell	access:public	signature:()
+cell_input	./include/cell.h	/^struct cell_input {$/;"	s
+cell_input::initial_abundances	./include/cell.h	/^    std::vector<double> initial_abundances;$/;"	m	struct:cell_input	access:public
+cell_input::inp_temperatures	./include/cell.h	/^    std::vector<double> inp_temperatures;$/;"	m	struct:cell_input	access:public
+cell_input::inp_times	./include/cell.h	/^    std::vector<double> inp_times;$/;"	m	struct:cell_input	access:public
+cell_input::inp_volumes	./include/cell.h	/^    std::vector<double> inp_volumes;$/;"	m	struct:cell_input	access:public
+cell_inputs	./include/starchem.h	/^    std::map<uint32_t, cell_input> cell_inputs;$/;"	m	class:star_chem	access:private
+cell_observer	./include/cell.h	/^    cell_observer( std::vector <abundance_v> &states, std::vector<double> &times, uint32_t store_every_n, uint32_t dump_every_n)$/;"	f	struct:cell_observer	access:public	signature:( std::vector <abundance_v> &states, std::vector<double> &times, uint32_t store_every_n, uint32_t dump_every_n)
+cell_observer	./include/cell.h	/^struct cell_observer {$/;"	s
+cell_observer::cell_observer	./include/cell.h	/^    cell_observer( std::vector <abundance_v> &states, std::vector<double> &times, uint32_t store_every_n, uint32_t dump_every_n)$/;"	f	struct:cell_observer	access:public	signature:( std::vector <abundance_v> &states, std::vector<double> &times, uint32_t store_every_n, uint32_t dump_every_n)
+cell_observer::m_ndump	./include/cell.h	/^    uint32_t m_nstore, m_ndump;$/;"	m	struct:cell_observer	access:public
+cell_observer::m_nstore	./include/cell.h	/^    uint32_t m_nstore, m_ndump;$/;"	m	struct:cell_observer	access:public
+cell_observer::m_times	./include/cell.h	/^    std::vector<double> &m_times;$/;"	m	struct:cell_observer	access:public
+cell_observer::n_called	./include/cell.h	/^    uint32_t n_called;$/;"	m	struct:cell_observer	access:public
+cell_observer::operator ()	./include/cell.h	/^    void operator() (const abundance_v &x, const double t, const double dt) {$/;"	f	struct:cell_observer	access:public	signature:(const abundance_v &x, const double t, const double dt)
+cell_state	./include/cell.h	/^  cell_state() : $/;"	f	struct:cell_state	access:public	signature:()
+cell_state	./include/cell.h	/^  cell_state(double t, double p, double s, double v):$/;"	f	struct:cell_state	access:public	signature:(double t, double p, double s, double v)
+cell_state	./include/cell.h	/^struct cell_state {$/;"	s
+cell_state::cell_state	./include/cell.h	/^  cell_state() : $/;"	f	struct:cell_state	access:public	signature:()
+cell_state::cell_state	./include/cell.h	/^  cell_state(double t, double p, double s, double v):$/;"	f	struct:cell_state	access:public	signature:(double t, double p, double s, double v)
+cell_state::pressure	./include/cell.h	/^  std::vector<double> pressure;$/;"	m	struct:cell_state	access:public
+cell_state::saturation	./include/cell.h	/^  std::vector<double> saturation;$/;"	m	struct:cell_state	access:public
+cell_state::temperature	./include/cell.h	/^  double temperature;$/;"	m	struct:cell_state	access:public
+cell_state::volume	./include/cell.h	/^  double volume;$/;"	m	struct:cell_state	access:public
+cells	./include/starchem.h	/^    std::vector<cell>             cells;$/;"	m	class:star_chem	access:private
+charge	./include/species.h	/^    int         charge;$/;"	m	class:species	access:private
+check_point	./include/interp2D.h	/^    bool   check_point(double xval, double yval);$/;"	p	class:interp2D	access:public	signature:(double xval, double yval)
+check_point	./src/interp2D.cpp	/^interp2D::check_point(double xval, double yval) {$/;"	f	class:interp2D	signature:(double xval, double yval)
+cid	./include/cell.h	/^    uint32_t cid;$/;"	m	class:cell	access:private
+cleanup	./include/starchem.h	/^    void cleanup() {}$/;"	f	class:star_chem	access:public	signature:()
+configuration	./include/configuration.h	/^    configuration();$/;"	p	struct:configuration	access:public	signature:()
+configuration	./include/configuration.h	/^struct configuration {$/;"	s
+configuration	./src/configuration.cpp	/^configuration::configuration(): desc("configuration") {$/;"	f	class:configuration	signature:()
+configuration::abundance_file	./include/configuration.h	/^    std::string abundance_file;$/;"	m	struct:configuration	access:public
+configuration::configuration	./include/configuration.h	/^    configuration();$/;"	p	struct:configuration	access:public	signature:()
+configuration::configuration	./src/configuration.cpp	/^configuration::configuration(): desc("configuration") {$/;"	f	class:configuration	signature:()
+configuration::desc	./include/configuration.h	/^    options::options_description  desc;$/;"	m	struct:configuration	access:public
+configuration::environment_file	./include/configuration.h	/^    std::string environment_file;$/;"	m	struct:configuration	access:public
+configuration::io_disk_n_steps	./include/configuration.h	/^    int io_disk_n_steps;$/;"	m	struct:configuration	access:public
+configuration::io_screen_n_steps	./include/configuration.h	/^    int io_screen_n_steps;$/;"	m	struct:configuration	access:public
+configuration::network_file	./include/configuration.h	/^    std::string network_file;$/;"	m	struct:configuration	access:public
+configuration::nucleation_files	./include/configuration.h	/^    std::vector<std::string> nucleation_files;$/;"	m	struct:configuration	access:public
+configuration::ode_abs_err	./include/configuration.h	/^    double ode_abs_err;$/;"	m	struct:configuration	access:public
+configuration::ode_dt_0	./include/configuration.h	/^    double ode_dt_0;$/;"	m	struct:configuration	access:public
+configuration::ode_rel_err	./include/configuration.h	/^    double ode_rel_err;$/;"	m	struct:configuration	access:public
+configuration::ode_time_0	./include/configuration.h	/^    double ode_time_0;$/;"	m	struct:configuration	access:public
+configuration::ode_time_n	./include/configuration.h	/^    double ode_time_n;$/;"	m	struct:configuration	access:public
+configuration::read_config	./include/configuration.h	/^    void read_config(const std::string &filename);$/;"	p	struct:configuration	access:public	signature:(const std::string &filename)
+configuration::read_config	./src/configuration.cpp	/^configuration::read_config(const std::string &config_filename) {$/;"	f	class:configuration	signature:(const std::string &config_filename)
+configuration::temperature_0	./include/configuration.h	/^    double temperature_0;$/;"	m	struct:configuration	access:public
+configuration::vm	./include/configuration.h	/^    options::variables_map        vm;$/;"	m	struct:configuration	access:public
+constants	./include/constants.h	/^namespace constants {$/;"	n
+constants::equPres	./include/constants.h	/^double equPres(const double A, const double B, const double T) {$/;"	f	namespace:constants	signature:(const double A, const double B, const double T)
+constants::kBeta	./include/constants.h	/^double kBeta(const double T) {$/;"	f	namespace:constants	signature:(const double T)
+constants::kBoltzmann	./include/constants.h	/^const double kBoltzmann = 1.38064852E-16;$/;"	m	namespace:constants
+constants::pressure_0	./include/constants.h	/^const double pressure_0 = 1.0E6;$/;"	m	namespace:constants
+constants::shapeFactor	./include/constants.h	/^const double shapeFactor = pow(36.0 * M_PI, 1. \/ 3.);$/;"	m	namespace:constants
+create_simulation_cells	./include/starchem.h	/^    void create_simulation_cells();$/;"	p	class:star_chem	access:public	signature:()
+create_simulation_cells	./src/starchem.cpp	/^star_chem::create_simulation_cells() {$/;"	f	class:star_chem	signature:()
+current_abundances	./include/cell.h	/^    abundance_v current_abundances;$/;"	m	class:cell	access:private
+d2d	./include/interp2D.h	/^    std::vector<data2D> d2d;$/;"	m	class:netcdf_reader	access:private
+data	./include/interp2D.h	/^    std::vector<data2D>     data;$/;"	m	class:interp2D	access:public
+data2D	./include/interp2D.h	/^typedef boost::multi_array<double, 2> data2D;$/;"	t
+desc	./include/configuration.h	/^    options::options_description  desc;$/;"	m	struct:configuration	access:public
+dim	./include/spline.h	/^    int dim() const;                             \/\/ matrix dimension$/;"	p	class:tk::band_matrix	access:public	signature:() const
+dim	./src/spline.cpp	/^int band_matrix::dim() const {$/;"	f	class:tk::band_matrix	signature:() const
+dx	./include/interp2D.h	/^    double   dx;$/;"	m	struct:axis	access:public
+env_temperature_spline	./include/cell.h	/^    tk::spline env_temperature_spline;$/;"	m	class:cell	access:private
+env_temperatures	./include/cell.h	/^    std::vector<double> env_temperatures;$/;"	m	class:cell	access:private
+env_times	./include/cell.h	/^    std::vector<double> env_times;$/;"	m	class:cell	access:private
+env_volume_spline	./include/cell.h	/^    tk::spline env_volume_spline;$/;"	m	class:cell	access:private
+env_volumes	./include/cell.h	/^    std::vector<double> env_volumes;$/;"	m	class:cell	access:private
+environment_file	./include/configuration.h	/^    std::string environment_file;$/;"	m	struct:configuration	access:public
+equPres	./include/constants.h	/^double equPres(const double A, const double B, const double T) {$/;"	f	namespace:constants	signature:(const double A, const double B, const double T)
+extra	./include/reaction.h	/^    std::string extra;$/;"	m	struct:reaction	access:public
+extra_rule	./include/network.h	/^    qi::rule<Iterator, std::string(), Skipper> extra_rule;$/;"	m	struct:network_parser	access:public
+first_deriv	./include/spline.h	/^        first_deriv = 1,$/;"	e	enum:tk::spline::bd_type
+following_species	./include/starchem.h	/^    std::vector<std::string>      following_species;$/;"	m	class:star_chem	access:private
+gamma	./include/reaction.h	/^    double gamma;$/;"	m	struct:reaction	access:public
+get_data	./include/interp2D.h	/^    std::vector<data2D>     get_data();$/;"	p	class:netcdf_reader	access:public	signature:()
+get_data	./src/interp2D.cpp	/^netcdf_reader::get_data() {$/;"	f	class:netcdf_reader	signature:()
+get_dims	./include/interp2D.h	/^    axes2D                  get_dims();$/;"	p	class:netcdf_reader	access:public	signature:()
+get_dims	./src/interp2D.cpp	/^netcdf_reader::get_dims() {$/;"	f	class:netcdf_reader	signature:()
+get_id	./include/cell.h	/^    int get_id() {$/;"	f	class:cell	access:public	signature:()
+get_species_index	./include/network.h	/^    size_t get_species_index(const std::string &spec);$/;"	p	struct:network	access:public	signature:(const std::string &spec)
+get_species_index	./src/network.cpp	/^network::get_species_index(const std::string &spec) {$/;"	f	class:network	signature:(const std::string &spec)
+get_species_list	./include/network.h	/^    int get_species_list();$/;"	p	struct:network	access:public	signature:()
+get_species_list	./src/network.cpp	/^network::get_species_list() {$/;"	f	class:network	signature:()
+grain	./include/grain.h	/^struct grain {$/;"	s
+grain::grain_species	./include/grain.h	/^    spec_v grain_species;$/;"	m	struct:grain	access:public
+grain::grain_species_idx	./include/grain.h	/^    specidx_v grain_species_idx;$/;"	m	struct:grain	access:public
+grain_species	./include/grain.h	/^    spec_v grain_species;$/;"	m	struct:grain	access:public
+grain_species_idx	./include/grain.h	/^    specidx_v grain_species_idx;$/;"	m	struct:grain	access:public
+id	./include/reaction.h	/^    int id;$/;"	m	struct:reaction	access:public
+initial_abundances	./include/cell.h	/^    abundance_v initial_abundances;$/;"	m	class:cell	access:private
+initial_abundances	./include/cell.h	/^    std::vector<double> initial_abundances;$/;"	m	struct:cell_input	access:public
+initial_elements	./include/starchem.h	/^    std::vector<std::string>      initial_elements;$/;"	m	class:star_chem	access:private
+inp_temperatures	./include/cell.h	/^    std::vector<double> inp_temperatures;$/;"	m	struct:cell_input	access:public
+inp_times	./include/cell.h	/^    std::vector<double> inp_times;$/;"	m	struct:cell_input	access:public
+inp_volumes	./include/cell.h	/^    std::vector<double> inp_volumes;$/;"	m	struct:cell_input	access:public
+interp2D	./include/interp2D.h	/^    interp2D() {};$/;"	f	class:interp2D	access:public	signature:()
+interp2D	./include/interp2D.h	/^    interp2D(const axes2D &input_axis, const std::vector<data2D> &input_data);$/;"	p	class:interp2D	access:public	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D	./include/interp2D.h	/^    interp2D(const std::string &ncdf_file);$/;"	p	class:interp2D	access:public	signature:(const std::string &ncdf_file)
+interp2D	./include/interp2D.h	/^class interp2D {$/;"	c
+interp2D	./src/interp2D.cpp	/^interp2D::interp2D(const axes2D &input_axis, const std::vector<data2D> &input_data) {$/;"	f	class:interp2D	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D	./src/interp2D.cpp	/^interp2D::interp2D(const std::string &ncdf_file) {$/;"	f	class:interp2D	signature:(const std::string &ncdf_file)
+interp2D::axes	./include/interp2D.h	/^    axes2D                  axes;$/;"	m	class:interp2D	access:public
+interp2D::check_point	./include/interp2D.h	/^    bool   check_point(double xval, double yval);$/;"	p	class:interp2D	access:public	signature:(double xval, double yval)
+interp2D::check_point	./src/interp2D.cpp	/^interp2D::check_point(double xval, double yval) {$/;"	f	class:interp2D	signature:(double xval, double yval)
+interp2D::data	./include/interp2D.h	/^    std::vector<data2D>     data;$/;"	m	class:interp2D	access:public
+interp2D::interp2D	./include/interp2D.h	/^    interp2D() {};$/;"	f	class:interp2D	access:public	signature:()
+interp2D::interp2D	./include/interp2D.h	/^    interp2D(const axes2D &input_axis, const std::vector<data2D> &input_data);$/;"	p	class:interp2D	access:public	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D::interp2D	./include/interp2D.h	/^    interp2D(const std::string &ncdf_file);$/;"	p	class:interp2D	access:public	signature:(const std::string &ncdf_file)
+interp2D::interp2D	./src/interp2D.cpp	/^interp2D::interp2D(const axes2D &input_axis, const std::vector<data2D> &input_data) {$/;"	f	class:interp2D	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D::interp2D	./src/interp2D.cpp	/^interp2D::interp2D(const std::string &ncdf_file) {$/;"	f	class:interp2D	signature:(const std::string &ncdf_file)
+interp2D::interpolate	./include/interp2D.h	/^    double interpolate(int col_id, double xval, double yval);$/;"	p	class:interp2D	access:public	signature:(int col_id, double xval, double yval)
+interp2D::interpolate	./src/interp2D.cpp	/^interp2D::interpolate(int col_id, double xval, double yval) {$/;"	f	class:interp2D	signature:(int col_id, double xval, double yval)
+interp2D::load_from_netcdf	./include/interp2D.h	/^    void load_from_netcdf(const std::string &nc_file);$/;"	p	class:interp2D	access:public	signature:(const std::string &nc_file)
+interp2D::load_from_netcdf	./src/interp2D.cpp	/^interp2D::load_from_netcdf(const std::string &nc_file) {$/;"	f	class:interp2D	signature:(const std::string &nc_file)
+interp2D::set_data	./include/interp2D.h	/^    void set_data(const axes2D &input_axis, const std::vector<data2D> &input_data);$/;"	p	class:interp2D	access:public	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D::set_data	./src/interp2D.cpp	/^interp2D::set_data(const axes2D &input_axis, const std::vector<data2D> &input_data) {$/;"	f	class:interp2D	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+interp2D::~interp2D	./include/interp2D.h	/^    virtual ~interp2D() {}$/;"	f	class:interp2D	access:public	signature:()
+interpolate	./include/interp2D.h	/^    double interpolate(int col_id, double xval, double yval);$/;"	p	class:interp2D	access:public	signature:(int col_id, double xval, double yval)
+interpolate	./src/interp2D.cpp	/^interp2D::interpolate(int col_id, double xval, double yval) {$/;"	f	class:interp2D	signature:(int col_id, double xval, double yval)
+io_disk_n_steps	./include/configuration.h	/^    int io_disk_n_steps;$/;"	m	struct:configuration	access:public
+io_screen_n_steps	./include/configuration.h	/^    int io_screen_n_steps;$/;"	m	struct:configuration	access:public
+kBeta	./include/constants.h	/^double kBeta(const double T) {$/;"	f	namespace:constants	signature:(const double T)
+kBoltzmann	./include/constants.h	/^const double kBoltzmann = 1.38064852E-16;$/;"	m	namespace:constants
+l_solve	./include/spline.h	/^    std::vector<double> l_solve(const std::vector<double> &b) const;$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b) const
+l_solve	./src/spline.cpp	/^std::vector<double> band_matrix::l_solve(const std::vector<double> &b) const {$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b) const
+load	./include/interp2D.h	/^    void                    load();$/;"	p	class:netcdf_reader	access:public	signature:()
+load_data	./include/interp2D.h	/^    void                    load_data();$/;"	p	class:netcdf_reader	access:private	signature:()
+load_data	./src/interp2D.cpp	/^netcdf_reader::load_data() {$/;"	f	class:netcdf_reader	signature:()
+load_dims	./include/interp2D.h	/^    void                    load_dims();$/;"	p	class:netcdf_reader	access:private	signature:()
+load_dims	./src/interp2D.cpp	/^netcdf_reader::load_dims() {$/;"	f	class:netcdf_reader	signature:()
+load_environment_data	./include/starchem.h	/^    void load_environment_data();$/;"	p	class:star_chem	access:public	signature:()
+load_environment_data	./src/starchem.cpp	/^star_chem::load_environment_data() {$/;"	f	class:star_chem	signature:()
+load_from_netcdf	./include/interp2D.h	/^    void load_from_netcdf(const std::string &nc_file);$/;"	p	class:interp2D	access:public	signature:(const std::string &nc_file)
+load_from_netcdf	./src/interp2D.cpp	/^interp2D::load_from_netcdf(const std::string &nc_file) {$/;"	f	class:interp2D	signature:(const std::string &nc_file)
+load_initial_abundances	./include/starchem.h	/^    void load_initial_abundances();$/;"	p	class:star_chem	access:public	signature:()
+load_initial_abundances	./src/starchem.cpp	/^star_chem::load_initial_abundances() {$/;"	f	class:star_chem	signature:()
+load_network	./include/starchem.h	/^    void load_network();$/;"	p	class:star_chem	access:public	signature:()
+load_network	./src/starchem.cpp	/^star_chem::load_network() {$/;"	f	class:star_chem	signature:()
+lu_decompose	./include/spline.h	/^    void lu_decompose();$/;"	p	class:tk::band_matrix	access:public	signature:()
+lu_decompose	./src/spline.cpp	/^void band_matrix::lu_decompose() {$/;"	f	class:tk::band_matrix	signature:()
+lu_solve	./include/spline.h	/^    std::vector<double> lu_solve(const std::vector<double> &b,$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b, bool is_lu_decomposed = false)
+lu_solve	./src/spline.cpp	/^std::vector<double> band_matrix::lu_solve(const std::vector<double> &b,$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b, bool is_lu_decomposed)
+m_a	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+m_b	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+m_b0	./include/spline.h	/^    double  m_b0, m_c0;                     \/\/ for left extrapol$/;"	m	class:tk::spline	access:private
+m_c	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+m_c0	./include/spline.h	/^    double  m_b0, m_c0;                     \/\/ for left extrapol$/;"	m	class:tk::spline	access:private
+m_force_linear_extrapolation	./include/spline.h	/^    bool    m_force_linear_extrapolation;$/;"	m	class:tk::spline	access:private
+m_left	./include/spline.h	/^    bd_type m_left, m_right;$/;"	m	class:tk::spline	access:private
+m_left_value	./include/spline.h	/^    double  m_left_value, m_right_value;$/;"	m	class:tk::spline	access:private
+m_lower	./include/spline.h	/^    std::vector< std::vector<double> > m_lower;  \/\/ lower band$/;"	m	class:tk::band_matrix	access:private
+m_ndump	./include/cell.h	/^    uint32_t m_nstore, m_ndump;$/;"	m	struct:cell_observer	access:public
+m_nstore	./include/cell.h	/^    uint32_t m_nstore, m_ndump;$/;"	m	struct:cell_observer	access:public
+m_right	./include/spline.h	/^    bd_type m_left, m_right;$/;"	m	class:tk::spline	access:private
+m_right_value	./include/spline.h	/^    double  m_left_value, m_right_value;$/;"	m	class:tk::spline	access:private
+m_times	./include/cell.h	/^    std::vector<double> &m_times;$/;"	m	struct:cell_observer	access:public
+m_upper	./include/spline.h	/^    std::vector< std::vector<double> > m_upper;  \/\/ upper band$/;"	m	class:tk::band_matrix	access:private
+m_x	./include/spline.h	/^    std::vector<double> m_x, m_y;           \/\/ x,y coordinates of points$/;"	m	class:tk::spline	access:private
+m_y	./include/spline.h	/^    std::vector<double> m_x, m_y;           \/\/ x,y coordinates of points$/;"	m	class:tk::spline	access:private
+main	./src/main.cpp	/^int main(int argc, char *argv[]) {$/;"	f	signature:(int argc, char *argv[])
+map_species_to_reactions	./include/network.h	/^    int map_species_to_reactions();$/;"	p	struct:network	access:public	signature:()
+map_species_to_reactions	./src/network.cpp	/^network::map_species_to_reactions() {$/;"	f	class:network	signature:()
+mass	./include/species.h	/^    double      mass;$/;"	m	class:species	access:private
+n_called	./include/cell.h	/^    uint32_t n_called;$/;"	m	struct:cell_observer	access:public
+n_reactions	./include/network.h	/^    int n_reactions;$/;"	m	struct:network	access:public
+n_species	./include/network.h	/^    int n_species;$/;"	m	struct:network	access:public
+name	./include/species.h	/^    std::string name;$/;"	m	class:species	access:private
+ncdf_dims	./include/interp2D.h	/^    std::vector<std::string> ncdf_dims, ncdf_vars;$/;"	m	class:netcdf_reader	access:private
+ncdf_file	./include/interp2D.h	/^    NcFile ncdf_file;$/;"	m	class:netcdf_reader	access:private
+ncdf_vars	./include/interp2D.h	/^    std::vector<std::string> ncdf_dims, ncdf_vars;$/;"	m	class:netcdf_reader	access:private
+net	./include/cell.h	/^    network *net;$/;"	m	class:cell	access:private
+net	./include/starchem.h	/^    network                       net;$/;"	m	class:star_chem	access:private
+netcdf_reader	./include/interp2D.h	/^    netcdf_reader(const std::string &nc_file,$/;"	p	class:netcdf_reader	access:public	signature:(const std::string &nc_file, const std::vector<std::string> &dims, const std::vector<std::string> &vars)
+netcdf_reader	./include/interp2D.h	/^class netcdf_reader {$/;"	c
+netcdf_reader	./src/interp2D.cpp	/^netcdf_reader::netcdf_reader(const std::string &nc_file,$/;"	f	class:netcdf_reader	signature:(const std::string &nc_file, const std::vector<std::string> &dims, const std::vector<std::string> &vars)
+netcdf_reader::a2d	./include/interp2D.h	/^    axes2D a2d;$/;"	m	class:netcdf_reader	access:private
+netcdf_reader::d2d	./include/interp2D.h	/^    std::vector<data2D> d2d;$/;"	m	class:netcdf_reader	access:private
+netcdf_reader::get_data	./include/interp2D.h	/^    std::vector<data2D>     get_data();$/;"	p	class:netcdf_reader	access:public	signature:()
+netcdf_reader::get_data	./src/interp2D.cpp	/^netcdf_reader::get_data() {$/;"	f	class:netcdf_reader	signature:()
+netcdf_reader::get_dims	./include/interp2D.h	/^    axes2D                  get_dims();$/;"	p	class:netcdf_reader	access:public	signature:()
+netcdf_reader::get_dims	./src/interp2D.cpp	/^netcdf_reader::get_dims() {$/;"	f	class:netcdf_reader	signature:()
+netcdf_reader::load	./include/interp2D.h	/^    void                    load();$/;"	p	class:netcdf_reader	access:public	signature:()
+netcdf_reader::load_data	./include/interp2D.h	/^    void                    load_data();$/;"	p	class:netcdf_reader	access:private	signature:()
+netcdf_reader::load_data	./src/interp2D.cpp	/^netcdf_reader::load_data() {$/;"	f	class:netcdf_reader	signature:()
+netcdf_reader::load_dims	./include/interp2D.h	/^    void                    load_dims();$/;"	p	class:netcdf_reader	access:private	signature:()
+netcdf_reader::load_dims	./src/interp2D.cpp	/^netcdf_reader::load_dims() {$/;"	f	class:netcdf_reader	signature:()
+netcdf_reader::ncdf_dims	./include/interp2D.h	/^    std::vector<std::string> ncdf_dims, ncdf_vars;$/;"	m	class:netcdf_reader	access:private
+netcdf_reader::ncdf_file	./include/interp2D.h	/^    NcFile ncdf_file;$/;"	m	class:netcdf_reader	access:private
+netcdf_reader::ncdf_vars	./include/interp2D.h	/^    std::vector<std::string> ncdf_dims, ncdf_vars;$/;"	m	class:netcdf_reader	access:private
+netcdf_reader::netcdf_reader	./include/interp2D.h	/^    netcdf_reader(const std::string &nc_file,$/;"	p	class:netcdf_reader	access:public	signature:(const std::string &nc_file, const std::vector<std::string> &dims, const std::vector<std::string> &vars)
+netcdf_reader::netcdf_reader	./src/interp2D.cpp	/^netcdf_reader::netcdf_reader(const std::string &nc_file,$/;"	f	class:netcdf_reader	signature:(const std::string &nc_file, const std::vector<std::string> &dims, const std::vector<std::string> &vars)
+netcdf_reader::~netcdf_reader	./include/interp2D.h	/^    virtual ~netcdf_reader() {}$/;"	f	class:netcdf_reader	access:public	signature:()
+network	./include/network.h	/^    network();$/;"	p	struct:network	access:public	signature:()
+network	./include/network.h	/^struct network {$/;"	s
+network	./src/network.cpp	/^network::network() :$/;"	f	class:network	signature:()
+network::get_species_index	./include/network.h	/^    size_t get_species_index(const std::string &spec);$/;"	p	struct:network	access:public	signature:(const std::string &spec)
+network::get_species_index	./src/network.cpp	/^network::get_species_index(const std::string &spec) {$/;"	f	class:network	signature:(const std::string &spec)
+network::get_species_list	./include/network.h	/^    int get_species_list();$/;"	p	struct:network	access:public	signature:()
+network::get_species_list	./src/network.cpp	/^network::get_species_list() {$/;"	f	class:network	signature:()
+network::map_species_to_reactions	./include/network.h	/^    int map_species_to_reactions();$/;"	p	struct:network	access:public	signature:()
+network::map_species_to_reactions	./src/network.cpp	/^network::map_species_to_reactions() {$/;"	f	class:network	signature:()
+network::n_reactions	./include/network.h	/^    int n_reactions;$/;"	m	struct:network	access:public
+network::n_species	./include/network.h	/^    int n_species;$/;"	m	struct:network	access:public
+network::network	./include/network.h	/^    network();$/;"	p	struct:network	access:public	signature:()
+network::network	./src/network.cpp	/^network::network() :$/;"	f	class:network	signature:()
+network::nucl_rate_data	./include/network.h	/^    std::map<int, interp2D> nucl_rate_data;$/;"	m	struct:network	access:public
+network::post_process	./include/network.h	/^    void post_process();$/;"	p	struct:network	access:public	signature:()
+network::post_process	./src/network.cpp	/^network::post_process() {$/;"	f	class:network	signature:()
+network::products_idx	./include/network.h	/^    std::vector<std::vector<int>> products_idx;$/;"	m	struct:network	access:public
+network::reactants_idx	./include/network.h	/^    std::vector<std::vector<int>> reactants_idx;$/;"	m	struct:network	access:public
+network::reactions	./include/network.h	/^    std::vector<reaction> reactions;$/;"	m	struct:network	access:public
+network::read_network	./include/network.h	/^    int read_network(const std::string &chemfile);$/;"	p	struct:network	access:public	signature:(const std::string &chemfile)
+network::read_network	./src/network.cpp	/^network::read_network(const std::string &chemfile) {$/;"	f	class:network	signature:(const std::string &chemfile)
+network::species	./include/network.h	/^    std::vector<std::string> species;$/;"	m	struct:network	access:public
+network::~network	./include/network.h	/^    virtual ~network();$/;"	p	struct:network	access:public	signature:()
+network::~network	./src/network.cpp	/^network::~network() {$/;"	f	class:network	signature:()
+network_file	./include/configuration.h	/^    std::string network_file;$/;"	m	struct:configuration	access:public
+network_parser	./include/network.h	/^    network_parser()$/;"	f	struct:network_parser	access:public	signature:()
+network_parser	./include/network.h	/^struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper> {$/;"	s	inherits:qi::grammar
+network_parser::extra_rule	./include/network.h	/^    qi::rule<Iterator, std::string(), Skipper> extra_rule;$/;"	m	struct:network_parser	access:public
+network_parser::network_parser	./include/network.h	/^    network_parser()$/;"	f	struct:network_parser	access:public	signature:()
 network_parser::network_rule	./include/network.h	/^    qi::rule<Iterator, reaction_v(), Skipper> network_rule;$/;"	m	struct:network_parser	access:public
 network_parser::reaction_rule	./include/network.h	/^    qi::rule<Iterator, reaction(), Skipper> reaction_rule;$/;"	m	struct:network_parser	access:public
 network_parser::spec_rule	./include/network.h	/^    qi::rule<Iterator, spec_v(), Skipper> spec_rule;$/;"	m	struct:network_parser	access:public
 network_rule	./include/network.h	/^    qi::rule<Iterator, reaction_v(), Skipper> network_rule;$/;"	m	struct:network_parser	access:public
-num	./include/network.h	/^  int num;$/;"	m	struct:reaction	access:public
-nx	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
-ny	./include/interpolator.h	/^  uint32_t  nx, ny;$/;"	m	class:interpolator	access:private
-operator ()	./include/interpolator.h	/^  virtual double operator () (double x, double y);$/;"	p	class:interpolator	access:public	signature:(double x, double y)
-operator ()	./include/solver.h	/^  void operator() (const abundance_type &x, abundance_type &dxdt, const double t);$/;"	p	class:solver	access:public	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
-operator ()	./src/interpolator.cpp	/^interpolator::operator () (double x, double y)$/;"	f	class:interpolator	signature:(double x, double y)
-operator ()	./src/solver.cpp	/^solver::operator() (const abundance_type &x, abundance_type &dxdt, const double t)$/;"	f	class:solver	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
-prods	./include/network.h	/^  spec_v prods;$/;"	m	struct:reaction	access:public
-rate	./include/network.h	/^  static double rate(const reaction &r) {return 0.0;}$/;"	f	struct:reaction	access:public	signature:(const reaction &r)
-reaction	./include/network.h	/^struct reaction$/;"	s
-reaction::alpha	./include/network.h	/^  double alpha;$/;"	m	struct:reaction	access:public
-reaction::beta	./include/network.h	/^  double beta;$/;"	m	struct:reaction	access:public
-reaction::dumb	./include/network.h	/^  char dumb;$/;"	m	struct:reaction	access:public
-reaction::gamma	./include/network.h	/^  double gamma;$/;"	m	struct:reaction	access:public
-reaction::num	./include/network.h	/^  int num;$/;"	m	struct:reaction	access:public
-reaction::prods	./include/network.h	/^  spec_v prods;$/;"	m	struct:reaction	access:public
-reaction::rate	./include/network.h	/^  static double rate(const reaction &r) {return 0.0;}$/;"	f	struct:reaction	access:public	signature:(const reaction &r)
-reaction::reacts	./include/network.h	/^  spec_v reacts;$/;"	m	struct:reaction	access:public
-reaction::type	./include/network.h	/^  int type;$/;"	m	struct:reaction	access:public
+nucl_rate_data	./include/network.h	/^    std::map<int, interp2D> nucl_rate_data;$/;"	m	struct:network	access:public
+nucleation_files	./include/configuration.h	/^    std::vector<std::string> nucleation_files;$/;"	m	struct:configuration	access:public
+num_lower	./include/spline.h	/^    int num_lower() const {$/;"	f	class:tk::band_matrix	access:public	signature:() const
+num_upper	./include/spline.h	/^    int num_upper() const {$/;"	f	class:tk::band_matrix	access:public	signature:() const
+nx	./include/interp2D.h	/^    uint32_t nx;$/;"	m	struct:axis	access:public
+ode_abs_err	./include/configuration.h	/^    double ode_abs_err;$/;"	m	struct:configuration	access:public
+ode_dt_0	./include/configuration.h	/^    double ode_dt_0;$/;"	m	struct:configuration	access:public
+ode_rel_err	./include/configuration.h	/^    double ode_rel_err;$/;"	m	struct:configuration	access:public
+ode_time_0	./include/configuration.h	/^    double ode_time_0;$/;"	m	struct:configuration	access:public
+ode_time_n	./include/configuration.h	/^    double ode_time_n;$/;"	m	struct:configuration	access:public
+operator ()	./include/cell.h	/^    void operator() (const abundance_v &x, abundance_v &dxdt, const double t);$/;"	p	class:cell	access:public	signature:(const abundance_v &x, abundance_v &dxdt, const double t)
+operator ()	./include/cell.h	/^    void operator() (const abundance_v &x, const double t, const double dt) {$/;"	f	struct:cell_observer	access:public	signature:(const abundance_v &x, const double t, const double dt)
+operator ()	./include/spline.h	/^    double   operator () (int i, int j) const;      \/\/ read$/;"	p	class:tk::band_matrix	access:public	signature:(int i, int j) const
+operator ()	./include/spline.h	/^    double &operator () (int i, int j);             \/\/ write$/;"	p	class:tk::band_matrix	access:public	signature:(int i, int j)
+operator ()	./include/spline.h	/^    double operator() (double x) const;$/;"	p	class:tk::spline	access:public	signature:(double x) const
+operator ()	./src/cell.cpp	/^void cell::operator()(const abundance_v &x, abundance_v &dxdt, const double t) {$/;"	f	class:cell	signature:(const abundance_v &x, abundance_v &dxdt, const double t)
+operator ()	./src/spline.cpp	/^double &band_matrix::operator () (int i, int j) {$/;"	f	class:tk::band_matrix	signature:(int i, int j)
+operator ()	./src/spline.cpp	/^double band_matrix::operator () (int i, int j) const {$/;"	f	class:tk::band_matrix	signature:(int i, int j) const
+operator ()	./src/spline.cpp	/^double spline::operator() (double x) const {$/;"	f	class:tk::spline	signature:(double x) const
+post_process	./include/network.h	/^    void post_process();$/;"	p	struct:network	access:public	signature:()
+post_process	./src/network.cpp	/^network::post_process() {$/;"	f	class:network	signature:()
+pressure	./include/cell.h	/^  std::vector<double> pressure;$/;"	m	struct:cell_state	access:public
+pressure_0	./include/constants.h	/^const double pressure_0 = 1.0E6;$/;"	m	namespace:constants
+print_abundances	./include/cell.h	/^    void print_abundances(const spec_v &following);$/;"	p	class:cell	access:public	signature:(const spec_v &following)
+print_abundances	./src/cell.cpp	/^cell::print_abundances(const spec_v &following) {$/;"	f	class:cell	signature:(const spec_v &following)
+prods	./include/reaction.h	/^    spec_v prods;$/;"	m	struct:reaction	access:public
+products_idx	./include/network.h	/^    std::vector<std::vector<int>> products_idx;$/;"	m	struct:network	access:public
+r_solve	./include/spline.h	/^    std::vector<double> r_solve(const std::vector<double> &b) const;$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b) const
+r_solve	./src/spline.cpp	/^std::vector<double> band_matrix::r_solve(const std::vector<double> &b) const {$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b) const
+rate	./include/reaction.h	/^    double rate(double tgas);$/;"	p	struct:reaction	access:public	signature:(double tgas)
+rate	./src/reaction.cpp	/^reaction::rate(double tgas) {$/;"	f	class:reaction	signature:(double tgas)
+reactants_idx	./include/network.h	/^    std::vector<std::vector<int>> reactants_idx;$/;"	m	struct:network	access:public
+reaction	./include/reaction.h	/^    reaction() : id(-1), type(-1) {}$/;"	f	struct:reaction	access:public	signature:()
+reaction	./include/reaction.h	/^struct reaction {$/;"	s
+reaction::alpha	./include/reaction.h	/^    double alpha;$/;"	m	struct:reaction	access:public
+reaction::beta	./include/reaction.h	/^    double beta;$/;"	m	struct:reaction	access:public
+reaction::extra	./include/reaction.h	/^    std::string extra;$/;"	m	struct:reaction	access:public
+reaction::gamma	./include/reaction.h	/^    double gamma;$/;"	m	struct:reaction	access:public
+reaction::id	./include/reaction.h	/^    int id;$/;"	m	struct:reaction	access:public
+reaction::prods	./include/reaction.h	/^    spec_v prods;$/;"	m	struct:reaction	access:public
+reaction::rate	./include/reaction.h	/^    double rate(double tgas);$/;"	p	struct:reaction	access:public	signature:(double tgas)
+reaction::rate	./src/reaction.cpp	/^reaction::rate(double tgas) {$/;"	f	class:reaction	signature:(double tgas)
+reaction::reaction	./include/reaction.h	/^    reaction() : id(-1), type(-1) {}$/;"	f	struct:reaction	access:public	signature:()
+reaction::reacts	./include/reaction.h	/^    spec_v reacts;$/;"	m	struct:reaction	access:public
+reaction::type	./include/reaction.h	/^    int type;$/;"	m	struct:reaction	access:public
+reaction::~reaction	./include/reaction.h	/^    ~reaction() {}$/;"	f	struct:reaction	access:public	signature:()
 reaction_rule	./include/network.h	/^    qi::rule<Iterator, reaction(), Skipper> reaction_rule;$/;"	m	struct:network_parser	access:public
+reaction_switch	./include/cell.h	/^    std::vector<bool> reaction_switch;$/;"	m	class:cell	access:private
 reaction_v	./include/network.h	/^typedef std::vector<reaction> reaction_v;$/;"	t
-reactions	./include/network.h	/^  reaction_v reactions;$/;"	m	struct:network	access:public
-reacts	./include/network.h	/^  spec_v reacts;$/;"	m	struct:reaction	access:public
-read_network	./include/network.h	/^  int read_network(const std::string& chemfile);$/;"	p	struct:network	access:public	signature:(const std::string& chemfile)
-read_network	./src/network.cpp	/^network::read_network(const std::string& chemfile)$/;"	f	class:network	signature:(const std::string& chemfile)
-solver	./include/solver.h	/^  solver(std::shared_ptr<network> n) : net(n) $/;"	f	class:solver	access:public	signature:(std::shared_ptr<network> n)
-solver	./include/solver.h	/^class solver$/;"	c
-solver::net	./include/solver.h	/^  std::shared_ptr<network> net;$/;"	m	class:solver	access:private
-solver::operator ()	./include/solver.h	/^  void operator() (const abundance_type &x, abundance_type &dxdt, const double t);$/;"	p	class:solver	access:public	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
-solver::operator ()	./src/solver.cpp	/^solver::operator() (const abundance_type &x, abundance_type &dxdt, const double t)$/;"	f	class:solver	signature:(const abundance_type &x, abundance_type &dxdt, const double t)
-solver::solver	./include/solver.h	/^  solver(std::shared_ptr<network> n) : net(n) $/;"	f	class:solver	access:public	signature:(std::shared_ptr<network> n)
-solver::~solver	./include/solver.h	/^  virtual ~solver() { };$/;"	f	class:solver	access:public	signature:()
+reactions	./include/network.h	/^    std::vector<reaction> reactions;$/;"	m	struct:network	access:public
+reacts	./include/reaction.h	/^    spec_v reacts;$/;"	m	struct:reaction	access:public
+read_config	./include/configuration.h	/^    void read_config(const std::string &filename);$/;"	p	struct:configuration	access:public	signature:(const std::string &filename)
+read_config	./src/configuration.cpp	/^configuration::read_config(const std::string &config_filename) {$/;"	f	class:configuration	signature:(const std::string &config_filename)
+read_network	./include/network.h	/^    int read_network(const std::string &chemfile);$/;"	p	struct:network	access:public	signature:(const std::string &chemfile)
+read_network	./src/network.cpp	/^network::read_network(const std::string &chemfile) {$/;"	f	class:network	signature:(const std::string &chemfile)
+reset	./include/interp2D.h	/^    void reset() {$/;"	f	struct:axis	access:public	signature:()
+resize	./include/spline.h	/^    void resize(int dim, int n_u, int n_l);      \/\/ init with dim,n_u,n_l$/;"	p	class:tk::band_matrix	access:public	signature:(int dim, int n_u, int n_l)
+resize	./src/spline.cpp	/^void band_matrix::resize(int dim, int n_u, int n_l) {$/;"	f	class:tk::band_matrix	signature:(int dim, int n_u, int n_l)
+run	./include/starchem.h	/^    void run();$/;"	p	class:star_chem	access:public	signature:()
+run	./src/starchem.cpp	/^star_chem::run() {$/;"	f	class:star_chem	signature:()
+saturation	./include/cell.h	/^  std::vector<double> saturation;$/;"	m	struct:cell_state	access:public
+saved_diag	./include/spline.h	/^    double  saved_diag(int i) const;$/;"	p	class:tk::band_matrix	access:public	signature:(int i) const
+saved_diag	./include/spline.h	/^    double &saved_diag(int i);$/;"	p	class:tk::band_matrix	access:public	signature:(int i)
+saved_diag	./src/spline.cpp	/^double &band_matrix::saved_diag(int i) {$/;"	f	class:tk::band_matrix	signature:(int i)
+saved_diag	./src/spline.cpp	/^double band_matrix::saved_diag(int i) const {$/;"	f	class:tk::band_matrix	signature:(int i) const
+sc_config	./include/starchem.h	/^    configuration                 sc_config;$/;"	m	class:star_chem	access:private
+second_deriv	./include/spline.h	/^        second_deriv = 2$/;"	e	enum:tk::spline::bd_type
+set_boundary	./include/spline.h	/^    void set_boundary(bd_type left, double left_value,$/;"	p	class:tk::spline	access:public	signature:(bd_type left, double left_value, bd_type right, double right_value, bool force_linear_extrapolation = false)
+set_boundary	./src/spline.cpp	/^void spline::set_boundary(spline::bd_type left, double left_value,$/;"	f	class:tk::spline	signature:(spline::bd_type left, double left_value, spline::bd_type right, double right_value, bool force_linear_extrapolation)
+set_data	./include/interp2D.h	/^    void set_data(const axes2D &input_axis, const std::vector<data2D> &input_data);$/;"	p	class:interp2D	access:public	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+set_data	./src/interp2D.cpp	/^interp2D::set_data(const axes2D &input_axis, const std::vector<data2D> &input_data) {$/;"	f	class:interp2D	signature:(const axes2D &input_axis, const std::vector<data2D> &input_data)
+set_env_data	./include/cell.h	/^    void set_env_data(const cell_input &input_data);$/;"	p	class:cell	access:private	signature:(const cell_input &input_data)
+set_env_data	./src/cell.cpp	/^cell::set_env_data(const cell_input &input_data) {$/;"	f	class:cell	signature:(const cell_input &input_data)
+set_following	./include/starchem.h	/^    void set_following(const spec_v &following_list) {$/;"	f	class:star_chem	access:public	signature:(const spec_v &following_list)
+set_init_abundances	./include/cell.h	/^    void set_init_abundances(const spec_v &init_s, const cell_input &init_data);$/;"	p	class:cell	access:private	signature:(const spec_v &init_s, const cell_input &init_data)
+set_init_abundances	./src/cell.cpp	/^cell::set_init_abundances(const spec_v &init_s, const cell_input &init_data) {$/;"	f	class:cell	signature:(const spec_v &init_s, const cell_input &init_data)
+set_points	./include/spline.h	/^    void set_points(const std::vector<double> &x,$/;"	p	class:tk::spline	access:public	signature:(const std::vector<double> &x, const std::vector<double> &y, bool cubic_spline = true)
+set_points	./src/spline.cpp	/^void spline::set_points(const std::vector<double> &x,$/;"	f	class:tk::spline	signature:(const std::vector<double> &x, const std::vector<double> &y, bool cubic_spline)
+shapeFactor	./include/constants.h	/^const double shapeFactor = pow(36.0 * M_PI, 1. \/ 3.);$/;"	m	namespace:constants
+solution_abundances	./include/cell.h	/^    std::vector<abundance_v> solution_abundances;$/;"	m	class:cell	access:private
+solution_times	./include/cell.h	/^    std::vector<double> solution_times;$/;"	m	class:cell	access:private
+solve	./include/cell.h	/^    void solve(const configuration &c);$/;"	p	class:cell	access:public	signature:(const configuration &c)
+solve	./src/cell.cpp	/^cell::solve(const configuration &config) {$/;"	f	class:cell	signature:(const configuration &config)
 spec_rule	./include/network.h	/^    qi::rule<Iterator, spec_v(), Skipper> spec_rule;$/;"	m	struct:network_parser	access:public
-spec_v	./include/network.h	/^typedef std::vector<std::string> spec_v;$/;"	t
-species	./include/network.h	/^  spec_v     species;$/;"	m	struct:network	access:public
-species	./include/species.h	/^  species() {} $/;"	f	class:species	access:public	signature:()
-species	./include/species.h	/^class species$/;"	c
-species::charge	./include/species.h	/^  int         charge;$/;"	m	class:species	access:private
-species::mass	./include/species.h	/^  double      mass;$/;"	m	class:species	access:private
-species::name	./include/species.h	/^  std::string name;$/;"	m	class:species	access:private
-species::species	./include/species.h	/^  species() {} $/;"	f	class:species	access:public	signature:()
-species::~species	./include/species.h	/^  virtual ~species() {}$/;"	f	class:species	access:public	signature:()
-type	./include/network.h	/^  int type;$/;"	m	struct:reaction	access:public
-~interpolator	./include/interpolator.h	/^  virtual ~interpolator() {}$/;"	f	class:interpolator	access:public	signature:()
-~network	./include/network.h	/^  virtual ~network();$/;"	p	struct:network	access:public	signature:()
-~network	./src/network.cpp	/^network::~network()$/;"	f	class:network	signature:()
-~solver	./include/solver.h	/^  virtual ~solver() { };$/;"	f	class:solver	access:public	signature:()
-~species	./include/species.h	/^  virtual ~species() {}$/;"	f	class:species	access:public	signature:()
+spec_v	./include/reaction.h	/^typedef std::vector<std::string> spec_v;$/;"	t
+species	./include/network.h	/^    std::vector<std::string> species;$/;"	m	struct:network	access:public
+species	./include/species.h	/^    species() {}$/;"	f	class:species	access:public	signature:()
+species	./include/species.h	/^class species {$/;"	c
+species::charge	./include/species.h	/^    int         charge;$/;"	m	class:species	access:private
+species::mass	./include/species.h	/^    double      mass;$/;"	m	class:species	access:private
+species::name	./include/species.h	/^    std::string name;$/;"	m	class:species	access:private
+species::species	./include/species.h	/^    species() {}$/;"	f	class:species	access:public	signature:()
+species::~species	./include/species.h	/^    virtual ~species() {}$/;"	f	class:species	access:public	signature:()
+spline	./include/spline.h	/^    spline(): m_left(second_deriv), m_right(second_deriv),$/;"	f	class:tk::spline	access:public	signature:()
+spline	./include/spline.h	/^class spline {$/;"	c	namespace:tk
+star_chem	./include/starchem.h	/^    star_chem(const std::string &config_filename);$/;"	p	class:star_chem	access:public	signature:(const std::string &config_filename)
+star_chem	./include/starchem.h	/^class star_chem {$/;"	c
+star_chem	./src/starchem.cpp	/^star_chem::star_chem(const std::string &config_file) {$/;"	f	class:star_chem	signature:(const std::string &config_file)
+star_chem::cell_inputs	./include/starchem.h	/^    std::map<uint32_t, cell_input> cell_inputs;$/;"	m	class:star_chem	access:private
+star_chem::cells	./include/starchem.h	/^    std::vector<cell>             cells;$/;"	m	class:star_chem	access:private
+star_chem::cleanup	./include/starchem.h	/^    void cleanup() {}$/;"	f	class:star_chem	access:public	signature:()
+star_chem::create_simulation_cells	./include/starchem.h	/^    void create_simulation_cells();$/;"	p	class:star_chem	access:public	signature:()
+star_chem::create_simulation_cells	./src/starchem.cpp	/^star_chem::create_simulation_cells() {$/;"	f	class:star_chem	signature:()
+star_chem::following_species	./include/starchem.h	/^    std::vector<std::string>      following_species;$/;"	m	class:star_chem	access:private
+star_chem::initial_elements	./include/starchem.h	/^    std::vector<std::string>      initial_elements;$/;"	m	class:star_chem	access:private
+star_chem::load_environment_data	./include/starchem.h	/^    void load_environment_data();$/;"	p	class:star_chem	access:public	signature:()
+star_chem::load_environment_data	./src/starchem.cpp	/^star_chem::load_environment_data() {$/;"	f	class:star_chem	signature:()
+star_chem::load_initial_abundances	./include/starchem.h	/^    void load_initial_abundances();$/;"	p	class:star_chem	access:public	signature:()
+star_chem::load_initial_abundances	./src/starchem.cpp	/^star_chem::load_initial_abundances() {$/;"	f	class:star_chem	signature:()
+star_chem::load_network	./include/starchem.h	/^    void load_network();$/;"	p	class:star_chem	access:public	signature:()
+star_chem::load_network	./src/starchem.cpp	/^star_chem::load_network() {$/;"	f	class:star_chem	signature:()
+star_chem::net	./include/starchem.h	/^    network                       net;$/;"	m	class:star_chem	access:private
+star_chem::run	./include/starchem.h	/^    void run();$/;"	p	class:star_chem	access:public	signature:()
+star_chem::run	./src/starchem.cpp	/^star_chem::run() {$/;"	f	class:star_chem	signature:()
+star_chem::sc_config	./include/starchem.h	/^    configuration                 sc_config;$/;"	m	class:star_chem	access:private
+star_chem::set_following	./include/starchem.h	/^    void set_following(const spec_v &following_list) {$/;"	f	class:star_chem	access:public	signature:(const spec_v &following_list)
+star_chem::star_chem	./include/starchem.h	/^    star_chem(const std::string &config_filename);$/;"	p	class:star_chem	access:public	signature:(const std::string &config_filename)
+star_chem::star_chem	./src/starchem.cpp	/^star_chem::star_chem(const std::string &config_file) {$/;"	f	class:star_chem	signature:(const std::string &config_file)
+star_chem::~star_chem	./include/starchem.h	/^    virtual ~star_chem() {}$/;"	f	class:star_chem	access:public	signature:()
+state_vars	./include/cell.h	/^    cell_state state_vars;$/;"	m	class:cell	access:private
+temperature	./include/cell.h	/^  double temperature;$/;"	m	struct:cell_state	access:public
+temperature_0	./include/configuration.h	/^    double temperature_0;$/;"	m	struct:configuration	access:public
+tk	./include/spline.h	/^namespace tk {$/;"	n
+tk	./src/spline.cpp	/^namespace tk {$/;"	n	file:
+tk::band_matrix	./include/spline.h	/^class band_matrix {$/;"	c	namespace:tk
+tk::band_matrix::band_matrix	./include/spline.h	/^    band_matrix() {};                             \/\/ constructor$/;"	f	class:tk::band_matrix	access:public	signature:()
+tk::band_matrix::band_matrix	./include/spline.h	/^    band_matrix(int dim, int n_u, int n_l);       \/\/ constructor$/;"	p	class:tk::band_matrix	access:public	signature:(int dim, int n_u, int n_l)
+tk::band_matrix::band_matrix	./src/spline.cpp	/^band_matrix::band_matrix(int dim, int n_u, int n_l) {$/;"	f	class:tk::band_matrix	signature:(int dim, int n_u, int n_l)
+tk::band_matrix::dim	./include/spline.h	/^    int dim() const;                             \/\/ matrix dimension$/;"	p	class:tk::band_matrix	access:public	signature:() const
+tk::band_matrix::dim	./src/spline.cpp	/^int band_matrix::dim() const {$/;"	f	class:tk::band_matrix	signature:() const
+tk::band_matrix::l_solve	./include/spline.h	/^    std::vector<double> l_solve(const std::vector<double> &b) const;$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b) const
+tk::band_matrix::l_solve	./src/spline.cpp	/^std::vector<double> band_matrix::l_solve(const std::vector<double> &b) const {$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b) const
+tk::band_matrix::lu_decompose	./include/spline.h	/^    void lu_decompose();$/;"	p	class:tk::band_matrix	access:public	signature:()
+tk::band_matrix::lu_decompose	./src/spline.cpp	/^void band_matrix::lu_decompose() {$/;"	f	class:tk::band_matrix	signature:()
+tk::band_matrix::lu_solve	./include/spline.h	/^    std::vector<double> lu_solve(const std::vector<double> &b,$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b, bool is_lu_decomposed = false)
+tk::band_matrix::lu_solve	./src/spline.cpp	/^std::vector<double> band_matrix::lu_solve(const std::vector<double> &b,$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b, bool is_lu_decomposed)
+tk::band_matrix::m_lower	./include/spline.h	/^    std::vector< std::vector<double> > m_lower;  \/\/ lower band$/;"	m	class:tk::band_matrix	access:private
+tk::band_matrix::m_upper	./include/spline.h	/^    std::vector< std::vector<double> > m_upper;  \/\/ upper band$/;"	m	class:tk::band_matrix	access:private
+tk::band_matrix::num_lower	./include/spline.h	/^    int num_lower() const {$/;"	f	class:tk::band_matrix	access:public	signature:() const
+tk::band_matrix::num_upper	./include/spline.h	/^    int num_upper() const {$/;"	f	class:tk::band_matrix	access:public	signature:() const
+tk::band_matrix::operator ()	./include/spline.h	/^    double   operator () (int i, int j) const;      \/\/ read$/;"	p	class:tk::band_matrix	access:public	signature:(int i, int j) const
+tk::band_matrix::operator ()	./include/spline.h	/^    double &operator () (int i, int j);             \/\/ write$/;"	p	class:tk::band_matrix	access:public	signature:(int i, int j)
+tk::band_matrix::operator ()	./src/spline.cpp	/^double &band_matrix::operator () (int i, int j) {$/;"	f	class:tk::band_matrix	signature:(int i, int j)
+tk::band_matrix::operator ()	./src/spline.cpp	/^double band_matrix::operator () (int i, int j) const {$/;"	f	class:tk::band_matrix	signature:(int i, int j) const
+tk::band_matrix::r_solve	./include/spline.h	/^    std::vector<double> r_solve(const std::vector<double> &b) const;$/;"	p	class:tk::band_matrix	access:public	signature:(const std::vector<double> &b) const
+tk::band_matrix::r_solve	./src/spline.cpp	/^std::vector<double> band_matrix::r_solve(const std::vector<double> &b) const {$/;"	f	class:tk::band_matrix	signature:(const std::vector<double> &b) const
+tk::band_matrix::resize	./include/spline.h	/^    void resize(int dim, int n_u, int n_l);      \/\/ init with dim,n_u,n_l$/;"	p	class:tk::band_matrix	access:public	signature:(int dim, int n_u, int n_l)
+tk::band_matrix::resize	./src/spline.cpp	/^void band_matrix::resize(int dim, int n_u, int n_l) {$/;"	f	class:tk::band_matrix	signature:(int dim, int n_u, int n_l)
+tk::band_matrix::saved_diag	./include/spline.h	/^    double  saved_diag(int i) const;$/;"	p	class:tk::band_matrix	access:public	signature:(int i) const
+tk::band_matrix::saved_diag	./include/spline.h	/^    double &saved_diag(int i);$/;"	p	class:tk::band_matrix	access:public	signature:(int i)
+tk::band_matrix::saved_diag	./src/spline.cpp	/^double &band_matrix::saved_diag(int i) {$/;"	f	class:tk::band_matrix	signature:(int i)
+tk::band_matrix::saved_diag	./src/spline.cpp	/^double band_matrix::saved_diag(int i) const {$/;"	f	class:tk::band_matrix	signature:(int i) const
+tk::band_matrix::~band_matrix	./include/spline.h	/^    ~band_matrix() {};                            \/\/ destructor$/;"	f	class:tk::band_matrix	access:public	signature:()
+tk::spline	./include/spline.h	/^class spline {$/;"	c	namespace:tk
+tk::spline::bd_type	./include/spline.h	/^    enum bd_type {$/;"	g	class:tk::spline	access:public
+tk::spline::first_deriv	./include/spline.h	/^        first_deriv = 1,$/;"	e	enum:tk::spline::bd_type
+tk::spline::m_a	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+tk::spline::m_b	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+tk::spline::m_b0	./include/spline.h	/^    double  m_b0, m_c0;                     \/\/ for left extrapol$/;"	m	class:tk::spline	access:private
+tk::spline::m_c	./include/spline.h	/^    std::vector<double> m_a, m_b, m_c;      \/\/ spline coefficients$/;"	m	class:tk::spline	access:private
+tk::spline::m_c0	./include/spline.h	/^    double  m_b0, m_c0;                     \/\/ for left extrapol$/;"	m	class:tk::spline	access:private
+tk::spline::m_force_linear_extrapolation	./include/spline.h	/^    bool    m_force_linear_extrapolation;$/;"	m	class:tk::spline	access:private
+tk::spline::m_left	./include/spline.h	/^    bd_type m_left, m_right;$/;"	m	class:tk::spline	access:private
+tk::spline::m_left_value	./include/spline.h	/^    double  m_left_value, m_right_value;$/;"	m	class:tk::spline	access:private
+tk::spline::m_right	./include/spline.h	/^    bd_type m_left, m_right;$/;"	m	class:tk::spline	access:private
+tk::spline::m_right_value	./include/spline.h	/^    double  m_left_value, m_right_value;$/;"	m	class:tk::spline	access:private
+tk::spline::m_x	./include/spline.h	/^    std::vector<double> m_x, m_y;           \/\/ x,y coordinates of points$/;"	m	class:tk::spline	access:private
+tk::spline::m_y	./include/spline.h	/^    std::vector<double> m_x, m_y;           \/\/ x,y coordinates of points$/;"	m	class:tk::spline	access:private
+tk::spline::operator ()	./include/spline.h	/^    double operator() (double x) const;$/;"	p	class:tk::spline	access:public	signature:(double x) const
+tk::spline::operator ()	./src/spline.cpp	/^double spline::operator() (double x) const {$/;"	f	class:tk::spline	signature:(double x) const
+tk::spline::second_deriv	./include/spline.h	/^        second_deriv = 2$/;"	e	enum:tk::spline::bd_type
+tk::spline::set_boundary	./include/spline.h	/^    void set_boundary(bd_type left, double left_value,$/;"	p	class:tk::spline	access:public	signature:(bd_type left, double left_value, bd_type right, double right_value, bool force_linear_extrapolation = false)
+tk::spline::set_boundary	./src/spline.cpp	/^void spline::set_boundary(spline::bd_type left, double left_value,$/;"	f	class:tk::spline	signature:(spline::bd_type left, double left_value, spline::bd_type right, double right_value, bool force_linear_extrapolation)
+tk::spline::set_points	./include/spline.h	/^    void set_points(const std::vector<double> &x,$/;"	p	class:tk::spline	access:public	signature:(const std::vector<double> &x, const std::vector<double> &y, bool cubic_spline = true)
+tk::spline::set_points	./src/spline.cpp	/^void spline::set_points(const std::vector<double> &x,$/;"	f	class:tk::spline	signature:(const std::vector<double> &x, const std::vector<double> &y, bool cubic_spline)
+tk::spline::spline	./include/spline.h	/^    spline(): m_left(second_deriv), m_right(second_deriv),$/;"	f	class:tk::spline	access:public	signature:()
+tk::spline::val_and_deriv	./include/spline.h	/^    void val_and_deriv(const double x, double &val, double &deriv);$/;"	p	class:tk::spline	access:public	signature:(const double x, double &val, double &deriv)
+tk::spline::val_and_deriv	./src/spline.cpp	/^void spline::val_and_deriv(const double x, double &val, double &deriv) {$/;"	f	class:tk::spline	signature:(const double x, double &val, double &deriv)
+type	./include/reaction.h	/^    int type;$/;"	m	struct:reaction	access:public
+val_and_deriv	./include/spline.h	/^    void val_and_deriv(const double x, double &val, double &deriv);$/;"	p	class:tk::spline	access:public	signature:(const double x, double &val, double &deriv)
+val_and_deriv	./src/spline.cpp	/^void spline::val_and_deriv(const double x, double &val, double &deriv) {$/;"	f	class:tk::spline	signature:(const double x, double &val, double &deriv)
+vm	./include/configuration.h	/^    options::variables_map        vm;$/;"	m	struct:configuration	access:public
+volume	./include/cell.h	/^  double volume;$/;"	m	struct:cell_state	access:public
+x	./include/interp2D.h	/^    std::vector<double> x;$/;"	m	struct:axis	access:public
+~band_matrix	./include/spline.h	/^    ~band_matrix() {};                            \/\/ destructor$/;"	f	class:tk::band_matrix	access:public	signature:()
+~cell	./include/cell.h	/^    virtual ~cell() { };$/;"	f	class:cell	access:public	signature:()
+~interp2D	./include/interp2D.h	/^    virtual ~interp2D() {}$/;"	f	class:interp2D	access:public	signature:()
+~netcdf_reader	./include/interp2D.h	/^    virtual ~netcdf_reader() {}$/;"	f	class:netcdf_reader	access:public	signature:()
+~network	./include/network.h	/^    virtual ~network();$/;"	p	struct:network	access:public	signature:()
+~network	./src/network.cpp	/^network::~network() {$/;"	f	class:network	signature:()
+~reaction	./include/reaction.h	/^    ~reaction() {}$/;"	f	struct:reaction	access:public	signature:()
+~species	./include/species.h	/^    virtual ~species() {}$/;"	f	class:species	access:public	signature:()
+~star_chem	./include/starchem.h	/^    virtual ~star_chem() {}$/;"	f	class:star_chem	access:public	signature:()
