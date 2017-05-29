@@ -10,12 +10,14 @@ using boost::multi_array;
 using boost::extents;
 using namespace netCDF;
 
-struct axis {
+struct axis
+{
     uint32_t nx;
     double   dx;
     std::vector<double> x;
 
-    void reset() {
+    void reset()
+    {
         nx = 0;
         dx = 0;
         x.clear();
@@ -25,7 +27,8 @@ struct axis {
 typedef std::array<axis, 2>           axes2D;
 typedef boost::multi_array<double, 2> data2D;
 
-class netcdf_reader {
+class netcdf_reader
+{
 
     NcFile ncdf_file;
     std::vector<std::string> ncdf_dims, ncdf_vars;
@@ -36,10 +39,10 @@ class netcdf_reader {
     void                    load_dims();
     void                    load_data();
 
-  public:
-    netcdf_reader(const std::string &nc_file,
-                  const std::vector<std::string> &dims,
-                  const std::vector<std::string> &vars);
+public:
+    netcdf_reader ( const std::string &nc_file,
+                    const std::vector<std::string> &dims,
+                    const std::vector<std::string> &vars );
 
     virtual ~netcdf_reader() {}
 
@@ -50,25 +53,26 @@ class netcdf_reader {
     std::vector<data2D>     get_data();
 };
 
-class interp2D {
-  public:
+class interp2D
+{
+public:
     axes2D                  axes;
     std::vector<data2D>     data;
 
-  public:
+public:
 
     interp2D() {};
-    interp2D(const std::string &ncdf_file);
-    interp2D(const axes2D &input_axis, const std::vector<data2D> &input_data);
+    interp2D ( const std::string &ncdf_file );
+    interp2D ( const axes2D &input_axis, const std::vector<data2D> &input_data );
 
     virtual ~interp2D() {}
 
-    void load_from_netcdf(const std::string &nc_file);
+    void load_from_netcdf ( const std::string &nc_file );
 
-    void set_data(const axes2D &input_axis, const std::vector<data2D> &input_data);
+    void set_data ( const axes2D &input_axis, const std::vector<data2D> &input_data );
 
-    bool   check_point(double xval, double yval);
-    double interpolate(int col_id, double xval, double yval);
+    bool   check_point ( double xval, double yval );
+    double interpolate ( int col_id, double xval, double yval );
 
 };
 

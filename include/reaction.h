@@ -7,7 +7,8 @@ typedef std::vector<std::string> spec_v;
 
 const int REACTION_TYPE_NUCLEATE = 101;
 
-struct reaction {
+struct reaction
+{
     spec_v reacts;
     spec_v prods;
 
@@ -22,10 +23,10 @@ struct reaction {
 
 
 
-    reaction() : id(-1), type(-1) {}
+    reaction() : id ( -1 ), type ( -1 ) {}
     ~reaction() {}
 
-    double rate(double tgas);
+    double rate ( double tgas );
 
 };
 

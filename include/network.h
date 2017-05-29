@@ -18,14 +18,16 @@ namespace phx = boost::phoenix;
 
 typedef std::vector<reaction> reaction_v;
 
-BOOST_FUSION_ADAPT_STRUCT(
-    reaction, (spec_v, reacts)(spec_v, prods)(double, alpha)(double, beta)(
-        double, gamma)(int, type)(int, id)(std::string, extra))
+BOOST_FUSION_ADAPT_STRUCT (
+    reaction, ( spec_v, reacts ) ( spec_v, prods ) ( double, alpha ) ( double, beta ) (
+        double, gamma ) ( int, type ) ( int, id ) ( std::string, extra ) )
 
 template <typename Iterator, typename Skipper>
-struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper> {
+struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>
+{
     network_parser()
-        : network_parser::base_type(network_rule) {
+        : network_parser::base_type ( network_rule )
+    {
         using qi::lexeme;
         using qi::lit;
         using qi::graph;
@@ -37,14 +39,14 @@ struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper> {
         using qi::eoi;
 
         spec_rule = lexeme[+graph] % '+';
-        extra_rule = +(char_ - '\n');
-        reaction_rule = spec_rule >> lit("->") >> spec_rule >> double_ >> double_ >>
-                        double_ >> int_ >> int_ >> *(extra_rule);
+        extra_rule = + ( char_ - '\n' );
+        reaction_rule = spec_rule >> lit ( "->" ) >> spec_rule >> double_ >> double_ >>
+                        double_ >> int_ >> int_ >> * ( extra_rule );
 
-        network_rule = reaction_rule % +char_("\n") >> omit[*space] > eoi;
+        network_rule = reaction_rule % +char_ ( "\n" ) >> omit[*space] > eoi;
 
-        BOOST_SPIRIT_DEBUG_NODES(
-            (network_rule)(reaction_rule)(spec_rule)(extra_rule));
+        BOOST_SPIRIT_DEBUG_NODES (
+            ( network_rule ) ( reaction_rule ) ( spec_rule ) ( extra_rule ) );
     }
     qi::rule<Iterator, reaction_v(), Skipper> network_rule;
     qi::rule<Iterator, reaction(), Skipper> reaction_rule;
@@ -52,24 +54,30 @@ struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper> {
     qi::rule<Iterator, std::string(), Skipper> extra_rule;
 };
 
-struct network {
+struct network
+{
     std::vector<reaction> reactions;
     std::vector<std::string> species;
 
-    std::vector<std::vector<int>> reactants_idx;
-    std::vector<std::vector<int>> products_idx;
+    std::vector<std::vector<size_t>> reactants_idx;
+    std::vector<std::vector<size_t>> products_idx;
+
+    std::vector<size_t> chemical_reactions_idx;
+    std::vector<size_t> nucleation_reactions_idx;
 
     std::map<int, interp2D> nucl_rate_data;
 
     int n_species;
     int n_reactions;
+    int n_nucleation_reactions;
+    int n_chemical_reactions;
 
-    int get_species_list();
-    int map_species_to_reactions();
+    void get_species_list();
+    void map_species_to_reactions();
 
-    size_t get_species_index(const std::string &spec);
+    size_t get_species_index ( const std::string &spec );
 
-    int read_network(const std::string &chemfile);
+    int read_network ( const std::string &chemfile );
     void post_process();
 
     network();

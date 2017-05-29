@@ -5,7 +5,8 @@
 
 namespace options = boost::program_options;
 
-struct configuration {
+struct configuration
+{
     double temperature_0;
     double ode_dt_0;
     double ode_time_0;
@@ -24,7 +25,7 @@ struct configuration {
     options::variables_map        vm;
 
     configuration();
-    void read_config(const std::string &filename);
+    void read_config ( const std::string &filename );
 };
 
 

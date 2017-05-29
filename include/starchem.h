@@ -10,7 +10,8 @@
 
 namespace options = boost::program_options;
 
-class star_chem {
+class StarChem
+{
 
     configuration                 sc_config;
     std::vector<std::string>      initial_elements;
@@ -22,9 +23,9 @@ class star_chem {
 
     std::vector<std::string>      following_species;
 
-  public:
-    star_chem(const std::string &config_filename);
-    virtual ~star_chem() {}
+public:
+    StarChem ( const std::string &config_filename );
+    virtual ~StarChem() {}
 
     void load_network();
     void load_initial_abundances();
@@ -32,8 +33,9 @@ class star_chem {
 
     void create_simulation_cells();
 
-    void set_following(const spec_v &following_list) {
-        following_species.assign(following_list.begin(), following_list.end());
+    void set_following ( const spec_v &following_list )
+    {
+        following_species.assign ( following_list.begin(), following_list.end() );
     }
 
     void run();
