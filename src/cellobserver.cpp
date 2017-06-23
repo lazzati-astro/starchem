@@ -6,13 +6,26 @@
 #include "cell.h"
 #include "cellobserver.h"
 
-CellObserver::CellObserver ( std::vector <abundance_v> &states, std::vector<double> &times, std::vector<cell_state> &statevars, uint32_t store_every_n, uint32_t dump_every_n, size_t cid , const spec_v& foll, network* net)
-    : m_states ( states ), m_times ( times ), m_vars ( statevars ), m_nstore ( store_every_n ), m_ndump ( dump_every_n ), n_called ( 0 ), following ( foll )
+CellObserver::CellObserver (  std::vector <abundance_v> &states,
+                              std::vector<double> &times,
+                              std::vector<cell_state> &statevars,
+                              uint32_t store_every_n,
+                              uint32_t dump_every_n,
+                              size_t cid ,
+                              const spec_v& foll,
+                              const network* net )
+    : m_states ( states ),
+      m_times ( times ),
+      m_vars ( statevars ),
+      m_nstore ( store_every_n ),
+      m_ndump ( dump_every_n ),
+      n_called ( 0 ),
+      following ( foll )
 {
-    ofname = "output" + std::to_string ( cid ) + ".dat";
+    ofname = "output/" + std::to_string ( cid ) + ".dat";
     ofs.open(ofname);
 
-    ofs << "integration of cell [" << cid << "]\n";
+//    ofs << "integration of cell [" << cid << "]\n";
     ofs << "time temperature ";
 
     for ( const auto &f : following )
@@ -41,7 +54,7 @@ void CellObserver::dump_abundances ( )
         ofs << fmt % m_vars[idx].temperature;
 
         for ( auto s_idx : following_idx )
-            ofs << fmt % m_states[idx][s_idx];
+            ofs << fmt % (m_states[idx][s_idx] * m_vars[idx].volume);
 
         ofs << "\n";
     }
@@ -55,7 +68,10 @@ void CellObserver::dump_abundances ( )
 }
 
 
-void CellObserver::operator() ( const abundance_v &x, const cell_state &s, const double t, const double dt  )
+void CellObserver::operator() ( const abundance_v &x,
+                                const cell_state &s,
+                                const double t,
+                                const double dt  )
 {
     ++n_called;
     if ( n_called % m_nstore == 0 )
@@ -67,7 +83,7 @@ void CellObserver::operator() ( const abundance_v &x, const cell_state &s, const
 
     if ( n_called % m_ndump == 0 )
     {
-        std::cout << "t = " << t << " dt = " << dt << " sat0 = " << s.parts[0].saturation << " grains = " << s.parts[0].grains_nucleating << std::endl;
+        std::cout << "t = " << t << " dt = " << dt << std::endl;
         dump_abundances();
     }
 }

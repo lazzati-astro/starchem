@@ -4,11 +4,13 @@
 #include "reaction.h"
 
 double
-reaction::rate ( double tgas )
+reaction::rate ( double tgas , double cosmic )
 {
     double k = 0.0;
     switch ( type )
     {
+    case 1:
+        k = alpha * cosmic;
     case 2:
     case 3:
     case 4:

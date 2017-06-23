@@ -1,0 +1,3 @@
+-I./include
+-I/home/mauneyc/local/plog/include
+-I/home/mauneyc/local/boost/include

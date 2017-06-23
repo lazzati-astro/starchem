@@ -11,7 +11,7 @@
 #include <boost/spirit/include/phoenix.hpp>
 
 #include "reaction.h"
-#include "interp2D.h"
+#include "bilinear_interpolator.h"
 
 namespace qi = boost::spirit::qi;
 namespace phx = boost::phoenix;
@@ -54,6 +54,8 @@ struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>
     qi::rule<Iterator, std::string(), Skipper> extra_rule;
 };
 
+typedef bilinear_interpolator interpolator;
+
 struct network
 {
     std::vector<reaction> reactions;
@@ -65,19 +67,19 @@ struct network
     std::vector<size_t> chemical_reactions_idx;
     std::vector<size_t> nucleation_reactions_idx;
 
-    std::map<int, interp2D> nucl_rate_data;
+    std::map<int, interpolator> nucl_rate_data;
 
-    int n_species;
-    int n_reactions;
-    int n_nucleation_reactions;
-    int n_chemical_reactions;
+    size_t n_species;
+    size_t n_reactions;
+    size_t n_nucleation_reactions;
+    size_t n_chemical_reactions;
 
     void get_species_list();
     void map_species_to_reactions();
 
-    size_t get_species_index ( const std::string &spec );
+    size_t get_species_index ( const std::string &spec ) const;
 
-    int read_network ( const std::string &chemfile );
+    void read_network ( const std::string &chemfile );
     void post_process();
 
     network();

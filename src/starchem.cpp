@@ -115,7 +115,7 @@ StarChem::create_simulation_cells()
 
     for ( const auto &ic : cell_inputs )
     {
-        cells.emplace_back ( &net, ic.first, initial_elements, ic.second );
+        cells.emplace_back ( &net, &sc_config, ic.first, initial_elements, ic.second );
     }
 
     LOGI << cells.size() << " cells created.";
@@ -126,8 +126,12 @@ StarChem::run()
 {
 
     LOGI << "Entering main integration loop";
-    LOGI << "for now we're just running one cell (cell_id = " << cells[0].get_id() << ")";
-    cells[0].solve ( sc_config , following_species );
+//    size_t max_now = cells.size();
+//#pragma omp parallel for
+//    for ( auto c = 0; c < max_now; ++c )
+//    {
+    cells[763].solve ( following_species );
+//    }
     LOGI << "Leaving main integration loop";
 //	cells[0].print_abundances ( following_species );
 }

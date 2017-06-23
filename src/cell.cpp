@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <chrono>
+#include <cmath>
 
 #include <boost/numeric/odeint.hpp>
 #include <boost/format.hpp>
@@ -17,15 +18,19 @@
 using namespace boost::numeric::odeint;
 using namespace std::chrono;
 
-cell::cell ( network *n, uint32_t id, const spec_v &init_s,
+
+cell::cell ( network* n, configuration* con,  uint32_t id, const spec_v &init_s,
              const cell_input &input_data )
-    : net ( n )
-    , cid ( id )
+    : net ( n ) ,
+      config ( con ) ,
+      cid ( id )
 {
     set_init_abundances ( init_s, input_data );
     set_env_data ( input_data );
 
     state_vars.parts.resize ( net->n_nucleation_reactions );
+    reaction_switch.resize ( net->n_reactions );
+    std::fill( reaction_switch.begin(), reaction_switch.end(), true );
 
     LOGD << "Created cell " << id;
 }
@@ -49,7 +54,7 @@ cell::set_init_abundances ( const spec_v &init_s, const cell_input &init_data )
         }
         else
         {
-            LOGD << "(" << init_s[i] << ") not found in network! it will be ignored";
+            LOGD << "(" << init_s[i] << ") not found in net->ork! it will be ignored";
         }
     }
 }
@@ -69,15 +74,25 @@ cell::set_env_data ( const cell_input &input_data )
     env_volume_spline.set_points ( env_times, env_volumes );
 }
 
-void
-cell::solve ( const configuration &config, const spec_v& foll )
+bool
+cell::check_solution(const abundance_v& x)
 {
-    auto abs_err = config.ode_abs_err, rel_err = config.ode_rel_err;
-    auto time_start = env_times.front(), time_end = env_times.back();
-    auto dt0 = config.ode_dt_0;
+    for (const auto &val : x)
+    {
+        if ( val < 0.0 || std::isnan(val) ) return false;
+    }
+    return true;
+}
 
-    auto store_every = config.io_disk_n_steps,
-         dump_every = config.io_screen_n_steps;
+void
+cell::solve ( const spec_v& foll )
+{
+    auto abs_err = config->ode_abs_err, rel_err = config->ode_rel_err;
+    auto time_start = env_times.front(), time_end = env_times.back();
+    auto dt0 = config->ode_dt_0;
+
+    auto store_every = config->io_disk_n_steps,
+         dump_every = config->io_screen_n_steps;
 
     LOGI << "Solver settings are ABS_ERR = " << abs_err
          << ", REL_ERR = " << rel_err;
@@ -87,38 +102,72 @@ cell::solve ( const configuration &config, const spec_v& foll )
     auto rkd = runge_kutta_dopri5<abundance_v> {};
     auto stepper = make_dense_output ( abs_err, rel_err, rkd );
 
-    auto solve_steps = 0;
+    auto n_solve_steps = 0;
+    auto n_stepper_reset = 0;
 
     current_abundances.assign ( initial_abundances.begin(),
                                 initial_abundances.end() );
+//    current_abundances.assign ( initial_abundances );
 
     stepper.initialize ( current_abundances, time_start, dt0 );
     calc_state_vars( current_abundances, time_start );
 
     CellObserver observer ( solution_abundances, solution_times, solution_vars, store_every,
-                            dump_every , cid, foll, net );
+                            dump_every , cid, foll, net);
 
     while ( ( stepper.current_time() < time_end ) )
     {
+
+        cell_state sv0 = state_vars;
+        auto t0 = stepper.current_time();
+        auto dt = stepper.current_time_step();
+        auto x0 = stepper.current_state();
+
+        integration_abandoned = false;
 
         auto step_start_time = high_resolution_clock::now();
         stepper.do_step ( std::ref ( * ( this ) ) );
         auto step_end_time = high_resolution_clock::now();
 
+        check_reactions ( stepper.current_state() );
+
+        if (integration_abandoned)
+        {
+//          std::cout << "reset! " << stepper.current_time_step() << std::endl;
+            stepper.initialize ( x0, t0, dt * 0.5 );
+            ++n_stepper_reset;
+        }
+        else
+        {
+            observer ( stepper.current_state(), state_vars, stepper.current_time(),
+                       stepper.current_time_step() );
+            n_stepper_reset = 0;
+        }
 
 
-        observer ( stepper.current_state(), state_vars, stepper.current_time(),
-                   stepper.current_time_step() );
+        if ( n_solve_steps > CELL_MAX_STEPS ) break;
+        if ( n_stepper_reset > CELL_MAXIMUM_STEPPER_RESETS ) break;
 
-        //    for(auto &interpolators : net->nucl_rate_data)
-        //    {
-        //
-        //    }
-
-        ++solve_steps;
+        ++n_solve_steps;
+        //std::cout << stepper.current_time() << " " << time_end << std::endl;
     }
 
-    LOGI << "Integration finished with " << solve_steps << " steps";
+    LOGI << "Integration finished with " << n_solve_steps << " steps";
+}
+
+void cell::check_reactions ( const abundance_v &x )
+{
+    for ( auto i = 0; i < net->n_reactions; ++i )
+    {
+        for ( const auto &r_idx : net->reactants_idx[i] )
+        {
+            if ( x[r_idx] < CELL_MINIMUM_ABUNDANCE )
+            {
+                reaction_switch[i] = false;
+                break;
+            }
+        }
+    }
 }
 
 void cell::calc_state_vars ( const abundance_v &x, const double time )
@@ -144,13 +193,16 @@ void cell::calc_state_vars ( const abundance_v &x, const double time )
 
         state_vars.parts[i].saturation = state_vars.parts[i].pressure / state_vars.parts[i].equilibrium_pressure;
 
+
+        assert(state_vars.parts[i].pressure == state_vars.parts[i].pressure );
+
         state_vars.parts[i].critical_size =
-            net->nucl_rate_data[net->reactions[reaction_idx].id].interpolate ( 1, state_vars.temperature,
+            net->nucl_rate_data[net->reactions[reaction_idx].id] ( 1, state_vars.temperature,
                     state_vars.parts[i].saturation );
         if ( state_vars.parts[i].critical_size > 0.0 )
         {
             state_vars.parts[i].log_nucleation_rate =
-                net->nucl_rate_data[net->reactions[reaction_idx].id].interpolate ( 0, state_vars.temperature,
+                net->nucl_rate_data[net->reactions[reaction_idx].id] ( 0, state_vars.temperature,
                         state_vars.parts[i].saturation );
             state_vars.parts[i].nucleation_rate = pow ( 10.0, state_vars.parts[i].log_nucleation_rate );
             state_vars.parts[i].grains_nucleating = state_vars.parts[i].nucleation_rate * state_vars.parts[i].critical_size;
@@ -172,12 +224,17 @@ void cell::calc_state_vars ( const abundance_v &x, const double time )
 void cell::operator() ( const abundance_v &x, abundance_v &dxdt, const double t )
 {
     //  LOGD << "Beginning integration step (t = " << t << ")";
-    //  LOGI << "using " << net->reactions.size() << " reactions";
+    //  LOGI << "using " << net->>reactions.size() << " reactions";
 
     double fi;
 
     std::fill ( dxdt.begin(), dxdt.end(), 0.0 );
 
+    if ( !check_solution ( x ) )
+    {
+        integration_abandoned = true;
+        return;
+    }
     calc_state_vars ( x, t );
 
     for ( auto i = 0; i < dxdt.size(); ++i )
@@ -188,6 +245,7 @@ void cell::operator() ( const abundance_v &x, abundance_v &dxdt, const double t 
     for ( auto i = 0; i < net->n_nucleation_reactions; ++i )
     {
         auto reaction_idx = net->nucleation_reactions_idx[i];
+        if ( !reaction_switch[reaction_idx] ) continue;
         for ( const auto &r : net->reactants_idx[reaction_idx] )
             dxdt[r] -= state_vars.parts[i].grains_nucleating;
         for ( const auto &p : net->products_idx[reaction_idx] )
@@ -198,6 +256,7 @@ void cell::operator() ( const abundance_v &x, abundance_v &dxdt, const double t 
     for ( auto i = 0; i < net->n_chemical_reactions; ++i )
     {
         auto reaction_idx = net->chemical_reactions_idx[i];
+        if ( !reaction_switch[reaction_idx] ) continue;
         fi = 1.0;
         for ( const auto &r : net->reactants_idx[reaction_idx] )
             fi *= x[r];
@@ -216,9 +275,20 @@ void cell::operator() ( const abundance_v &x, abundance_v &dxdt, const double t 
 }
 
 /*void
-cell::jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v
-&dfdt)
+cell::jacobian(const abundance_v &x, jacobi_m &J, const double &t, abundance_v &dfdt)
 {
+  for ( auto i = 0; i < net->n_species; ++i )
+  {
+    for ( auto j = 0; j < net->n_species; ++j )
+    {
+//      J(i,j) = 0.0;
+    }
+  }
 
-}
-*/
+  for ( auto i = 0; i < net->n_chemical_reactions; ++i )
+  {
+
+  }
+
+}*/
+

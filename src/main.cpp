@@ -20,7 +20,7 @@ int main ( int argc, char *argv[] )
     sc.load_environment_data();
     sc.create_simulation_cells();
 
-    spec_v following = {"C", "O", "Mg", "Si", "CO", "C2", "c_grain", "si_grain"};
+    spec_v following = {"C", "O", "Mg", "Si", "CO", "C2", "O2","c_grain", "si_grain"};
     sc.set_following ( following );
 
     sc.run();

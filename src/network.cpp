@@ -2,10 +2,10 @@
 #include <vector>
 #include <unordered_set>
 #include <string>
+#include <boost/spirit/include/qi.hpp>
 
 #include <plog/Log.h>
 
-#include <boost/spirit/include/qi.hpp>
 #include "network.h"
 
 network::network() :
@@ -19,7 +19,7 @@ network::~network()
 
 }
 
-int
+void
 network::read_network ( const std::string &chemfile )
 {
     LOGI << "Reading network from [" << chemfile << "]";
@@ -79,7 +79,7 @@ network::post_process()
             LOGI << "reading " << reactions[i].extra << " for nucleation data";
 
             std::string nucleation_file ( reactions[i].extra );
-            nucl_rate_data.insert ( std::make_pair ( reactions[i].id, interp2D ( nucleation_file ) ) );
+            nucl_rate_data.insert ( std::make_pair ( reactions[i].id, interpolator ( nucleation_file ) ) );
 
             nucleation_reactions_idx.emplace_back ( i );
             LOGI << "nucleation data loaded";
@@ -96,7 +96,7 @@ network::post_process()
 }
 
 size_t
-network::get_species_index ( const std::string &spec )
+network::get_species_index ( const std::string &spec ) const
 {
     auto it = std::find ( species.begin(), species.end(), spec );
     auto idx = -1;
@@ -145,14 +145,3 @@ network::get_species_list()
     }
 }
 
-/*std::vector<size_t>
-network::get_nucleation_reactions()
-{
-  std::vector<size_t> rvec;
-  for ( auto i = 0; i < n_reactions; ++i ) {
-    if (reactions[i].type == REACTION_TYPE_NUCLEATE)
-      rvec.emplace_back(i);
-  }
-
-  return rvec;
-}*/

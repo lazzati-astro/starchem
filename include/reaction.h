@@ -26,7 +26,7 @@ struct reaction
     reaction() : id ( -1 ), type ( -1 ) {}
     ~reaction() {}
 
-    double rate ( double tgas );
+    double rate ( double tgas , double cosmic = 0);
 
 };
 

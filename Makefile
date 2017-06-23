@@ -35,15 +35,16 @@ LIB_DIR += $(BOOST_DIR)/lib
 INC_DIR += ./include $(BOOST_DIR)/include $(PLOG_DIR)/include
 
 # compiler flags
+OMP_FLAGS := 
 COMMON_FLAGS := $(addprefix -I, $(INC_DIR))
-CXX_FLAGS := -std=c++14
-LINK_FLAGS :=
+CXX_FLAGS := -std=c++1z $(OMP_FLAGS)
+LINK_FLAGS := $(OMP_FLAGS)
 LD_FLAGS := $(addprefix -l,$(LIBS)) $(addprefix -L, $(LIB_DIR))
 
 ifeq ($(DEBUG),1)
 	COMMON_FLAGS += -pg 
 else
-	COMMON_FLAGS += -Ofast -march=native
+	COMMON_FLAGS += -O3 -march=native
 endif
 
 # source files
