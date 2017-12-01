@@ -81,8 +81,28 @@ network::post_process()
             std::string nucleation_file ( reactions[i].extra );
             nucl_rate_data.insert ( std::make_pair ( reactions[i].id, interpolator ( nucleation_file ) ) );
 
+            // count the elemets
+            std :: unordered_set<size_t> react_elems;
+
+            for ( auto &re : reactants_idx[i] ) react_elems.emplace ( re );
+   
+            std :: map < size_t, uint32_t > tmp_map;
+
+            for ( auto &re : react_elems )
+            {
+              tmp_map.insert( std::make_pair ( re,  std :: count (  std::begin (reactants_idx[i]), 
+                                                                    std::end   (reactants_idx[i]),
+                                                                    re ) ) );
+            }
+
+            nucleation_species_count.emplace_back ( tmp_map );
             nucleation_reactions_idx.emplace_back ( i );
             LOGI << "nucleation data loaded";
+            for ( auto &kv : tmp_map)
+            {
+              LOGI << "species " << kv.first << " has " << kv.second << " count";
+            }
+
         }
         else
         {
@@ -95,19 +115,28 @@ network::post_process()
     LOGI << " # of chemical reactions = " << n_chemical_reactions;
 }
 
+/*
+ * returns the internal index that corrisponds to the
+ * species
+ *
+ */
 size_t
 network::get_species_index ( const std::string &spec ) const
 {
-    auto it = std::find ( species.begin(), species.end(), spec );
+    auto it = std::find ( std :: begin(species), std :: end(species), spec );
     auto idx = -1;
     if ( it == species.end() )
         LOGE << "ERROR: cannot find species(" << spec << ")";
     else
-        idx = std::distance ( species.begin(), it );
+        idx = std::distance ( std :: begin(species), it );
     return idx;
 }
 
-
+/*
+ * maps reactions/products species to their respective
+ * indices. this is functionally a std::map, but std::map
+ * is slow on lookups, so I decided to code this explicitly.
+ */
 void
 network::map_species_to_reactions()
 {
@@ -123,6 +152,11 @@ network::map_species_to_reactions()
     }
 }
 
+/*
+ * constructs the internal species list from the network.
+ * this is a slight hack of std::unordered_set, which
+ * only allows unique inserts.
+ */
 void
 network::get_species_list()
 {

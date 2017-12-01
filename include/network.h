@@ -12,6 +12,7 @@
 
 #include "reaction.h"
 #include "bilinear_interpolator.h"
+#include "bicubic_interpolator.h"
 
 namespace qi = boost::spirit::qi;
 namespace phx = boost::phoenix;
@@ -55,6 +56,8 @@ struct network_parser : qi::grammar<Iterator, reaction_v(), Skipper>
 };
 
 typedef bilinear_interpolator interpolator;
+//typedef bicubic_interpolator interpolator;
+
 
 struct network
 {
@@ -64,8 +67,11 @@ struct network
     std::vector<std::vector<size_t>> reactants_idx;
     std::vector<std::vector<size_t>> products_idx;
 
+
     std::vector<size_t> chemical_reactions_idx;
     std::vector<size_t> nucleation_reactions_idx;
+
+    std::vector<std::map<size_t, uint32_t>> nucleation_species_count;
 
     std::map<int, interpolator> nucl_rate_data;
 

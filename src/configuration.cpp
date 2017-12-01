@@ -16,6 +16,7 @@ configuration::configuration() : desc ( "configuration" )
     desc.add_options() ( "ode_time_n", options::value<double> ( &ode_time_n )->default_value ( 1.0E0 ), "integration end time" );
     desc.add_options() ( "ode_abs_err", options::value<double> ( &ode_abs_err )->default_value ( 1.0E-6 ), "solver absolute error criteria" );
     desc.add_options() ( "ode_rel_err", options::value<double> ( &ode_rel_err )->default_value ( 1.0E-6 ), "solver relative error criteria" );
+    desc.add_options() ( "ode_dt_min", options::value<double> ( &ode_dt_min )->default_value ( 1.0E-6 ), "solver minimum allowed dt" );
     desc.add_options() ( "network_file", options::value<std::string> ( &network_file ), "file with network" );
     desc.add_options() ( "abundance_file", options::value<std::string> ( &abundance_file ), "file with inital abundances" );
     desc.add_options() ( "environment_file", options::value<std::string> ( &environment_file ), "file with stellar environment variables" );
@@ -41,6 +42,7 @@ configuration::read_config ( const std::string &config_filename )
     LOGD << "configuration: ode_time_n = " << ode_time_n;
     LOGD << "configuration: ode_abs_err = " << ode_abs_err;
     LOGD << "configuration: ode_rel_err = " << ode_rel_err;
+    LOGD << "configuration: ode_dt_min = " << ode_dt_min;
     LOGD << "configuration: network_file = " << network_file;
     LOGD << "configuration: abundance_file = " << abundance_file;
     LOGD << "configuration: environment_file = " << environment_file;

@@ -130,7 +130,7 @@ StarChem::run()
 //#pragma omp parallel for
 //    for ( auto c = 0; c < max_now; ++c )
 //    {
-    cells[763].solve ( following_species );
+    cells[0].solve ( following_species );
 //    }
     LOGI << "Leaving main integration loop";
 //	cells[0].print_abundances ( following_species );

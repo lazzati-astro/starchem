@@ -33,6 +33,7 @@ private:
 
 public:
 
+    bicubic_interpolator () {}
     bicubic_interpolator ( const axes2D &input_axis, const std::vector<data2D> &input_data );
     bicubic_interpolator ( const std::string &ncdf_file );
 

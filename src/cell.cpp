@@ -81,7 +81,7 @@ cell::check_solution(const abundance_v& x)
     {
         if ( val < 0.0 || std::isnan(val) ) return false;
     }
-    return true;
+
 }
 
 void
@@ -105,8 +105,8 @@ cell::solve ( const spec_v& foll )
     auto n_solve_steps = 0;
     auto n_stepper_reset = 0;
 
-    current_abundances.assign ( initial_abundances.begin(),
-                                initial_abundances.end() );
+    current_abundances.assign ( std :: begin(initial_abundances),
+                                std :: end(initial_abundances) );
 //    current_abundances.assign ( initial_abundances );
 
     stepper.initialize ( current_abundances, time_start, dt0 );
@@ -123,6 +123,36 @@ cell::solve ( const spec_v& foll )
         auto dt = stepper.current_time_step();
         auto x0 = stepper.current_state();
 
+        if ( dt < config->ode_dt_min )
+        {
+          for ( auto i = 0; i < net->n_nucleation_reactions; ++i )
+          {
+            auto reaction_idx = net->nucleation_reactions_idx[i];
+            if ( state_vars.parts[i].saturation > 1.0E6 )
+            {
+//              auto n_mol = x[key_idx] / static_cast<double>(n_key);
+              
+              for ( const auto &kv : net->nucleation_species_count[i] )
+              {
+              
+              }
+
+              for ( const auto &r : net->reactants_idx[reaction_idx] )
+              {
+              // 
+//              reaction_switch[reaction_idx] = false;
+              }
+       //     dxdt[r] -= state_vars.parts[i].grains_nucleating;
+              for ( const auto &p : net->products_idx[reaction_idx] )
+              {
+
+              }
+       //     dxdt[p] += state_vars.parts[i].grains_nucleating;
+            }
+          }
+
+        }
+
         integration_abandoned = false;
 
         auto step_start_time = high_resolution_clock::now();
@@ -134,6 +164,7 @@ cell::solve ( const spec_v& foll )
         if (integration_abandoned)
         {
 //          std::cout << "reset! " << stepper.current_time_step() << std::endl;
+            LOGD << "integration abandoned; reseting with " << dt * 0.5;
             stepper.initialize ( x0, t0, dt * 0.5 );
             ++n_stepper_reset;
         }
@@ -152,7 +183,7 @@ cell::solve ( const spec_v& foll )
         //std::cout << stepper.current_time() << " " << time_end << std::endl;
     }
 
-    LOGI << "Integration finished with " << n_solve_steps << " steps";
+    LOGI << "Integration finished with " << n_solve_steps << " steps" ;
 }
 
 void cell::check_reactions ( const abundance_v &x )
@@ -228,7 +259,7 @@ void cell::operator() ( const abundance_v &x, abundance_v &dxdt, const double t 
 
     double fi;
 
-    std::fill ( dxdt.begin(), dxdt.end(), 0.0 );
+    std::fill ( std :: begin(dxdt), std :: end(dxdt), 0.0 );
 
     if ( !check_solution ( x ) )
     {

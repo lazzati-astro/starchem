@@ -83,7 +83,7 @@ void CellObserver::operator() ( const abundance_v &x,
 
     if ( n_called % m_ndump == 0 )
     {
-        std::cout << "t = " << t << " dt = " << dt << std::endl;
+        std::cout << "t = " << t << " dt = " << dt << " T = " << s.temperature <<  " S = " << s.parts[1].saturation << " J = " << s.parts[1].nucleation_rate << std::endl;
         dump_abundances();
     }
 }

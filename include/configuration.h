@@ -9,10 +9,12 @@ struct configuration
 {
     double temperature_0;
     double ode_dt_0;
+    double ode_dt_min;
     double ode_time_0;
     double ode_time_n;
     double ode_abs_err;
     double ode_rel_err;
+
 
     int io_disk_n_steps;
     int io_screen_n_steps;
